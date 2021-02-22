@@ -34,15 +34,15 @@ buildChannel("screen_info", screenInfoHandler, engine)
 
 // 给Flutter调用的映射方法
 static func screenInfoHandler(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
-	switch call.method {
-		case "getScreenInfo":
-			result(["screen_scale": UIScreen.mainScale,
-				"screen_width": UIScreen.mainWidth,
+    switch call.method {
+    case "getScreenInfo":
+        result(["screen_scale": UIScreen.mainScale,
+                "screen_width": UIScreen.mainWidth,
 				"screen_height": UIScreen.mainHeight])
             
-		default:
-			// FlutterMethodNotImplemented：目标方法没有实现
-			result(FlutterMethodNotImplemented)
+    default:
+        // FlutterMethodNotImplemented：目标方法没有实现
+        result(FlutterMethodNotImplemented)
 	}
 }
 ```
