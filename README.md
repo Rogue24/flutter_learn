@@ -38,12 +38,12 @@ static func screenInfoHandler(_ call: FlutterMethodCall, _ result: @escaping Flu
     case "getScreenInfo":
         result(["screen_scale": UIScreen.mainScale,
                 "screen_width": UIScreen.mainWidth,
-				"screen_height": UIScreen.mainHeight])
+                "screen_height": UIScreen.mainHeight])
             
     default:
         // FlutterMethodNotImplemented：目标方法没有实现
         result(FlutterMethodNotImplemented)
-	}
+    }
 }
 ```
 
