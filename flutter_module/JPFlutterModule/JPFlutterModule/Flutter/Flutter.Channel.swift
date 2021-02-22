@@ -7,27 +7,22 @@
 
 import flutter_boost
 
-/// Flutter 渠道，用于 Flutter 端发起调用原生的方法，同时可以回调参数给回 Flutter 端，属于双向流
+/// Flutter 渠道，用于 Flutter 端发起调用原生的方法，可以同步回调参数给回 Flutter 端，属于双向流
+
 extension Flutter {
-    static let channelPrefix = "zhoujianping.com/"
-    typealias MethodCallHandler = (_ call: FlutterMethodCall, _ result: @escaping FlutterResult) -> ()
-    
-    static func initializeMethodCallHandler(_ engine: FlutterEngine) {
+    static func buildChannel(_ name: String,
+                             _ handler: @escaping (_ call: FlutterMethodCall, _ result: @escaping FlutterResult) -> (),
+                             _ engine: FlutterEngine) {
+        let channelPrefix = Key.channelPrefix
         let messenger = engine.binaryMessenger
-        buildChannel(for: "app_info", messenger, handler: appInfoHandler)
-        buildChannel(for: "device_info", messenger, handler: deviceInfoHandler)
-        buildChannel(for: "image_picker", messenger, handler: imagePickerHandler)
-        buildChannel(for: "test", messenger, handler: testHandler)
-    }
-    
-    static func buildChannel(for name: String, _ messenger: FlutterBinaryMessenger, handler: @escaping MethodCallHandler) {
         let channel = FlutterMethodChannel(name: channelPrefix + name, binaryMessenger: messenger)
         channel.setMethodCallHandler(handler)
     }
 }
 
-// MARK:- app_info
+/// Flutter 可调用原生的方法：
 extension Flutter {
+    // MARK:- app_info
     static func appInfoHandler(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         switch call.method {
         case "isDebug":
@@ -38,10 +33,8 @@ extension Flutter {
             result(FlutterMethodNotImplemented)
         }
     }
-}
-
-// MARK:- device_info
-extension Flutter {
+    
+    // MARK:- device_info
     static func deviceInfoHandler(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         switch call.method {
         case "getPlatformVersion":
@@ -66,17 +59,27 @@ extension Flutter {
             result(FlutterMethodNotImplemented)
         }
     }
-}
- 
-// MARK:- image_picker
-extension Flutter {
+    
+    // MARK:- screen_info
+    static func screenInfoHandler(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        switch call.method {
+        case "getScreenInfo":
+            result(["screen_scale": UIScreen.mainScale,
+                    "screen_width": UIScreen.mainWidth,
+                    "screen_height": UIScreen.mainHeight])
+            
+        default:
+            // FlutterMethodNotImplemented：目标方法没有实现
+            result(FlutterMethodNotImplemented)
+        }
+    }
+    
+    // MARK:- image_picker
     static func imagePickerHandler(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         result(FlutterMethodNotImplemented)
     }
-}
     
-// MARK:- test
-extension Flutter {
+    // MARK:- test
     static func testHandler(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         switch call.method {
         case "getSomeText":

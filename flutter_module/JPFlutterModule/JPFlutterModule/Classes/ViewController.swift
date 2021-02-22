@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func sendEventAction(_ sender: UIBarButtonItem) {
-        Flutter.sendEvent(Flutter.Key.event_sendFrom_native_test.rawValue, arguments: ["iOS 发送消息": "美男平"])
+        Flutter.Event.sendFrom_native_test(["iOS 发送消息": "美男平"]).send()
     }
 }
 
@@ -40,7 +40,7 @@ extension ViewController: UITableViewDataSource {
         cell.textLabel?.textColor = .randomColor
         
         let route = routes[indexPath.row]
-        cell.textLabel?.text = route.routeName
+        cell.textLabel?.text = route.name
         
         return cell
     }

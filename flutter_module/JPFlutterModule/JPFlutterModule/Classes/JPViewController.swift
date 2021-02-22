@@ -54,11 +54,12 @@ import flutter_boost
     }
     
     @objc func goBack() {
-        guard let uid = flb_params[Flutter.pageCallBackId] as? String else {
-            JPrint("回不去！！！")
+        let uid = uniqueIDString()
+        guard uid.count > 0 else {
+            JPrint("回不去！！！uid 空的！！！")
             return
         }
-        Flutter.close(uid, ["jp_param": "从 iOS - JPViewController 回去的"], animated: true) { (finish) in
+        Flutter.close(uid, [Flutter.Key.jp_param.rawValue: "从 iOS - JPViewController 回去的"], animated: true) { (finish) in
             JPrint(finish ? "完成" : "失败")
         }
     }
@@ -80,7 +81,7 @@ import flutter_boost
     
     func name() -> String { flb_name }
     func params() -> [AnyHashable: Any] { flb_params }
-    func uniqueIDString() -> String { flb_params[Flutter.pageCallBackId] as? String ?? "" }
+    func uniqueIDString() -> String { flb_params[Flutter.Key.pageCallBackId] as? String ?? "" }
     func setName(_ name: String, params: [AnyHashable: Any]) {
         flb_name = name
         flb_params = params

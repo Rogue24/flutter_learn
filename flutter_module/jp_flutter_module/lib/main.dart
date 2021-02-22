@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:jp_flutter_module/flutterboost/JPBoostNavigatorObserver.dart';
-import 'package:jp_flutter_module/pages/JP/1_bottom_sheet.dart';
-import 'package:jp_flutter_module/pages/JP/2_center_aleat.dart';
-import 'package:jp_flutter_module/pages/JP/jp_demo.dart';
-import 'package:jp_flutter_module/pages/JP/jp_main.dart';
+import 'package:jp_flutter_module/flutterboost/jp_flutter_boost.dart';
 import 'package:jp_flutter_module/shared/JPLog.dart';
 import 'package:jp_flutter_module/shared/JPSizeFit.dart';
 import 'package:flutter_boost/flutter_boost.dart';
@@ -61,35 +56,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    
-    JPrint("初始化 FlutterBoost ~");
+    // 初始化屏幕信息
+    JPSizeFit.initialize();
 
-    // 接收原生发出的数据
-    // ignore: missing_return
-    FlutterBoost.singleton.channel.addEventListener('event_sendFrom_native_test', (name, arguments) {
-      JPrint("Flutter 接收到 iOS 发出的消息 --- name: $name, arguments: $arguments");
-    });
-    
-    // 配置路由
-    FlutterBoost.singleton.registerPageBuilders({
-      JPMainPage.routeName: (pageName, params, _) => JPMainPage(),
-      JPDemo.routeName: (pageName, params, _) => JPDemo(),
-      JPBottomSheetExample.routeName: (pageName, params, _) => JPBottomSheetExample(),
-      JPCenterAleatExample.routeName: (pageName, params, _) => JPCenterAleatExample(),
-    });
+    JPrint("初始化 FlutterBoost ~");
+    JPFlutterBoost.register();
   }
 
   @override
   Widget build(BuildContext context) {
-    // 混编就得确定【Widget能初始化时】才初始化屏幕信息
-    JPSizeFit.initialize();
-    
-    return Container(color: JPRandomColor(),);
+    return Container();
   }
-
-  
-
-  
 }
 
 

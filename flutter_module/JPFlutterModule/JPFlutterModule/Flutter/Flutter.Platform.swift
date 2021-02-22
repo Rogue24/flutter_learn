@@ -7,7 +7,8 @@
 
 import flutter_boost
 
-/// FLBPlatform：实现 Flutter 在原生的跳转/关闭的驱动，类似协议，【不要直接使用】，使用 FlutterBoostPlugin 的类方法去跳转/关闭
+/// FLBPlatform：实现 Flutter 在原生的跳转/关闭的驱动（FlutterBoostPlugin 会调用这些方法，类似协议）
+/// 跳转/关闭【不要直接使用这里的方法】，而是使用 FlutterBoostPlugin 的类方法去执行
 extension Flutter {
     class Platform: NSObject, FLBPlatform {
         /**

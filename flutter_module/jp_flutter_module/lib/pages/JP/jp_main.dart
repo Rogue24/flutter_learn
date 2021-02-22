@@ -126,7 +126,7 @@ class JPMainPage extends StatelessWidget {
           FloatingActionButton(
             heroTag: 4,
             child: Icon(Icons.message),
-            onPressed: () => _invokeTtKey.currentState.getScreenSize(),
+            onPressed: () => _invokeTtKey.currentState.getScreenInfo(),
           ),
 
           SizedBox(height: 8,),
@@ -154,7 +154,7 @@ class _TestText extends StatefulWidget {
 }
 
 class __TestTextState extends State<_TestText> {
-  MethodChannel _methodChannel = MethodChannel('zhoujianping.com/device_info');
+  MethodChannel _methodChannel = MethodChannel('zhoujianping.com/screen_info');
   
   String _text;
 
@@ -172,18 +172,18 @@ class __TestTextState extends State<_TestText> {
     setState(() => _text = text);
   }
 
-  void getScreenSize() async {
+  void getScreenInfo() async {
     try {
-      final result = await _methodChannel.invokeMethod("getScreenSize");
-      JPrint("调用iOS方法✅  getScreenSize --- $result");
-      updateText(result);
+      final Map result = await _methodChannel.invokeMethod("getScreenInfo");
+      JPrint("调用iOS方法✅  getScreenInfo --- $result");
+      updateText("scale: ${result["screen_scale"]}, width: ${result["screen_width"]}, height: ${result["screen_height"]}");
     } catch(error) {
       if (error is PlatformException) {
         PlatformException exc = error;
-        JPrint("调用iOS方法❌  getScreenSize --- ${exc.message}");
+        JPrint("调用iOS方法❌  getScreenInfo --- ${exc.message}");
         updateText(exc.message);
       } else {
-        JPrint("调用iOS方法❌（不是PlatformException）getScreenSize --- $error");
+        JPrint("调用iOS方法❌（不是PlatformException）getScreenInfo --- $error");
         updateText(error.toString());
       }
     }

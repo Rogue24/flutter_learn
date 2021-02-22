@@ -127,8 +127,8 @@
 			children = (
 				007FF45B25DE7294003EC0B2 /* Flutter.swift */,
 				1ADE062925DFF3440034079A /* Flutter.Route.swift */,
-				1ADE062B25DFF3440034079A /* Flutter.Channel.swift */,
 				1ADE065825E0321F0034079A /* Flutter.Event.swift */,
+				1ADE062B25DFF3440034079A /* Flutter.Channel.swift */,
 				1ADE062A25DFF3440034079A /* Flutter.Platform.swift */,
 				1ADE062C25DFF3440034079A /* Flutter.Container.swift */,
 			);
