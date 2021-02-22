@@ -5,15 +5,15 @@
 - Flutter Module by flutter_boost
 
 ## 对flutter_boost的二次封装
-#### iOS
+#### iOS (Swift)
 
-- 路由
+- 路由（协议+枚举）
 
 ```swift
 Flutter.Route.center_aleat(["title": "你好"]).jump()
 ```
 
-- 事件监听/发送
+- 事件监听/发送（协议+枚举）
 
 ```swift
 // 监听
@@ -39,7 +39,6 @@ static func screenInfoHandler(_ call: FlutterMethodCall, _ result: @escaping Flu
         result(["screen_scale": UIScreen.mainScale,
                 "screen_width": UIScreen.mainWidth,
                 "screen_height": UIScreen.mainHeight])
-            
     default:
         // FlutterMethodNotImplemented：目标方法没有实现
         result(FlutterMethodNotImplemented)
