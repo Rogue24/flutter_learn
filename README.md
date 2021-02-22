@@ -18,8 +18,8 @@ Flutter.Route.center_aleat(["title": "你好"]).jump()
 ```swift
 // 监听
 Flutter.Event.sendFrom_flutter().addListener { (name, arguments) in
-	guard let obName = name, let obArguments = arguments else { return }
-	print("接收到 Flutter 消息：\(obName) --- \(obArguments)")
+    guard let obName = name, let obArguments = arguments else { return }
+    print("接收到 Flutter 消息：\(obName) --- \(obArguments)")
 }
 
 // 发送
