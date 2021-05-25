@@ -63,6 +63,7 @@ extension Flutter {
         case jp_demo(_ params: [String: Any] = [Key.jp_param.rawValue: "从iOS push过来的"])
         case bottom_sheet(_ params: [String: Any] = [:])
         case center_aleat(_ params: [String: Any] = [:])
+        case jp_test
 
         var name: String {
             switch self {
@@ -70,6 +71,7 @@ extension Flutter {
             case .jp_demo: return "/jp_demo"
             case .bottom_sheet: return "/bottom_sheet"
             case .center_aleat: return "/center_aleat"
+            case .jp_test: return "/jp_test"
             }
         }
 
@@ -79,6 +81,7 @@ extension Flutter {
             case let .jp_demo(params): return params
             case let .bottom_sheet(params): return params
             case let .center_aleat(params): return params
+            case .jp_test: return [:]
             }
         }
     }

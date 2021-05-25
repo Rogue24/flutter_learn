@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:jp_flutter_demo/JP/4_future_wait_test.dart';
 import 'package:jp_flutter_demo/JPLog.dart';
 import '1_bottom_sheet.dart';
 import '2_center_aleat.dart';
+import '3_getx_test.dart';
+import '5_animate_test.dart';
+import '6_frame_test.dart';
 
 class JPDemo extends StatelessWidget {
   static String title = "JP Demo";
@@ -47,6 +51,43 @@ class _JPDemoListState extends State<_JPDemoList> {
           ),
           onTap: () => JPPush(widget: JPCenterAleatExample(), context: context),
         ),
+
+        Divider(),
+        ListTile(
+          title: Text(
+            JPGetxExample.title,
+            style: _biggerFont,
+          ),
+          onTap: () => JPPush(widget: JPGetxExample(), context: context),
+        ),
+
+        Divider(),
+        ListTile(
+          title: Text(
+            JPFutureWaitExample.title,
+            style: _biggerFont,
+          ),
+          onTap: () => JPPush(widget: JPFutureWaitExample(), context: context),
+        ),
+
+        Divider(),
+        ListTile(
+          title: Text(
+            JPAnimateExample.title,
+            style: _biggerFont,
+          ),
+          onTap: () => JPPush(widget: JPAnimateExample(), context: context),
+        ),
+
+        Divider(),
+        ListTile(
+          title: Text(
+            JPFrameExample.title,
+            style: _biggerFont,
+          ),
+          onTap: () => JPPush(widget: JPFrameExample(), context: context),
+        ),
+
       ],
     );
   }

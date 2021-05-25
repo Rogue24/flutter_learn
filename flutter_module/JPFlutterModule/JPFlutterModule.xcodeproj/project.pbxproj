@@ -37,6 +37,7 @@
 		1AA969A725DEAB960072AE4F /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9699125DEAB960072AE4F /* Function.swift */; };
 		1AA969A825DEAB960072AE4F /* Gradientable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9699425DEAB960072AE4F /* Gradientable.swift */; };
 		1AA969A925DEAB960072AE4F /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA9699525DEAB960072AE4F /* GradientView.swift */; };
+		1AD2B53C2652B6270004CA6B /* JPTempVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2B53B2652B6270004CA6B /* JPTempVC.swift */; };
 		1ADE062D25DFF3440034079A /* Flutter.Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADE062925DFF3440034079A /* Flutter.Route.swift */; };
 		1ADE062E25DFF3440034079A /* Flutter.Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADE062A25DFF3440034079A /* Flutter.Platform.swift */; };
 		1ADE062F25DFF3440034079A /* Flutter.Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADE062B25DFF3440034079A /* Flutter.Channel.swift */; };
@@ -78,6 +79,7 @@
 		1AA9699125DEAB960072AE4F /* Function.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		1AA9699425DEAB960072AE4F /* Gradientable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradientable.swift; sourceTree = "<group>"; };
 		1AA9699525DEAB960072AE4F /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		1AD2B53B2652B6270004CA6B /* JPTempVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JPTempVC.swift; sourceTree = "<group>"; };
 		1ADE062925DFF3440034079A /* Flutter.Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flutter.Route.swift; sourceTree = "<group>"; };
 		1ADE062A25DFF3440034079A /* Flutter.Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flutter.Platform.swift; sourceTree = "<group>"; };
 		1ADE062B25DFF3440034079A /* Flutter.Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flutter.Channel.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				007FF45125DE5725003EC0B2 /* ViewController.swift */,
 				00762A8025E1369C0091C88E /* JPViewController.swift */,
+				1AD2B53B2652B6270004CA6B /* JPTempVC.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				007FF3A425DE4897003EC0B2 /* JPSolveTool.m in Sources */,
 				1AA969A325DEAB960072AE4F /* UIColor.Extension.swift in Sources */,
 				1ADE065925E0321F0034079A /* Flutter.Event.swift in Sources */,
+				1AD2B53C2652B6270004CA6B /* JPTempVC.swift in Sources */,
 				1ADE062D25DFF3440034079A /* Flutter.Route.swift in Sources */,
 				1AA9699D25DEAB960072AE4F /* UIViewController.Extension.swift in Sources */,
 				1AA969A625DEAB960072AE4F /* Const.swift in Sources */,

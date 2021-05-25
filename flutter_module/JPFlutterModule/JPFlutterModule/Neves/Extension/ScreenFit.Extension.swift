@@ -5,50 +5,43 @@
 //  Created by aa on 2021/2/7.
 //
 
-extension Int: JPCompatible {}
-extension JP where Base == Int {
-    var px: CGFloat { CGFloat(base) * BasisWScale }
+extension Int {
+    var px: CGFloat { CGFloat(self) * BasisWScale }
 }
 
-extension Float: JPCompatible {}
-extension JP where Base == Float {
-    var px: CGFloat { CGFloat(base) * BasisWScale }
+extension Float {
+    var px: CGFloat { CGFloat(self) * BasisWScale }
 }
 
-extension Double: JPCompatible {}
-extension JP where Base == Double {
-    var px: CGFloat { CGFloat(base) * BasisWScale }
+extension Double {
+    var px: CGFloat { CGFloat(self) * BasisWScale }
 }
 
-extension CGFloat: JPCompatible {}
-extension JP where Base == CGFloat {
-    var px: CGFloat { base * BasisWScale }
+extension CGFloat {
+    var px: CGFloat { self * BasisWScale }
 }
 
-extension CGPoint: JPCompatible {}
-extension JP where Base == CGPoint {
-    var px: CGPoint { .init(x: base.x * BasisWScale, y: base.y * BasisWScale) }
+extension CGPoint {
+    var px: CGPoint { .init(x: self.x * BasisWScale, y: self.y * BasisWScale) }
     
     static func px(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
         CGPoint(x: x * BasisWScale, y: y * BasisWScale)
     }
 }
 
-extension CGSize: JPCompatible {}
-extension JP where Base == CGSize {
-    var px: CGSize { .init(width: base.width * BasisWScale, height: base.height * BasisWScale) }
+extension CGSize {
+    var px: CGSize { .init(width: self.width * BasisWScale, height: self.height * BasisWScale) }
     
     static func px(_ w: CGFloat, _ h: CGFloat) -> CGSize {
         CGSize(width: w * BasisWScale, height: h * BasisWScale)
     }
 }
 
-extension CGRect: JPCompatible {}
-extension JP where Base == CGRect {
-    var px: CGRect { .init(x: base.origin.x * BasisWScale,
-                           y: base.origin.y * BasisWScale,
-                           width: base.width * BasisWScale,
-                           height: base.height * BasisWScale) }
+extension CGRect {
+    var px: CGRect { .init(x: self.origin.x * BasisWScale,
+                           y: self.origin.y * BasisWScale,
+                           width: self.width * BasisWScale,
+                           height: self.height * BasisWScale) }
     
     static func px(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> CGRect {
         CGRect(x: x * BasisWScale,

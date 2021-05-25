@@ -40,6 +40,13 @@ void JPrint(Object message) {
   _CustomTrace programInfo = _CustomTrace(current);
   print("[${programInfo.fileName}] 第${programInfo.lineNumber}行: $message");
 }
+// ignore: non_constant_identifier_names
+void JPrintWiteDate(Object message) {
+  if (_inProduction) return;
+  StackTrace current = StackTrace.current;
+  _CustomTrace programInfo = _CustomTrace(current);
+  print("${DateTime.now()} [${programInfo.fileName}] 第${programInfo.lineNumber}行: $message");
+}
 
 class _CustomTrace {
   final StackTrace _trace;

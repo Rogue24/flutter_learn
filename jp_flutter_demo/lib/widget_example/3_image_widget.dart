@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:jp_flutter_demo/JPLog.dart';
 
@@ -111,19 +112,44 @@ class _HomeContent extends StatelessWidget {
 
           SizedBox(height: 10,),
 
-          Column(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("圆角图片", style: TextStyle(fontSize: 15, color: Colors.white)),
-              SizedBox(height: 10,),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  "https://tva1.sinaimg.cn/large/006y8mN6gy1g7aa03bmfpj3069069mx8.jpg",
-                  width: 160,
-                  height: 160,
-                ),
+              Column(
+                children: [
+                  Text("圆角图片", style: TextStyle(fontSize: 15, color: Colors.white)),
+                  SizedBox(height: 10,),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      "https://tva1.sinaimg.cn/large/006y8mN6gy1g7aa03bmfpj3069069mx8.jpg",
+                      width: 160,
+                      height: 160,
+                    ),
+                  ),
+                ]
               ),
-            ]
+
+              SizedBox(width: 10,),
+
+              Column(
+                children: [
+                  Text("第三方图片缓存库\nCachedNetworkImage\n类似SDWebImage", style: TextStyle(fontSize: 15, color: Colors.white), textAlign: TextAlign.center,),
+                  SizedBox(height: 10,),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                      imageUrl: "https://tva1.sinaimg.cn/large/006y8mN6gy1g7aa03bmfpj3069069mx8.jpg",
+                      width: 160,
+                      height: 160,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Image.asset("assets/images/Dwa.jpg"),
+                      errorWidget: (context, url, error) => Image.asset("assets/images/Dwa.jpg"),
+                    ),
+                  ),
+                ]
+              ),
+            ],
           ),
         ],
       ),

@@ -12,7 +12,7 @@ target 'JPFlutterModule' do
   # 2.安装Flutter模块
   install_all_flutter_pods(flutter_application_path)
   
-  pod 'lottie-ios'
+#  pod 'lottie-ios'
   pod 'LookinServer', :configurations => ['Debug']
 
   # Pods for JPFlutterModule

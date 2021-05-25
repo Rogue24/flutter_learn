@@ -8,7 +8,6 @@ PODS:
   - jp_flutter_module (0.0.1):
     - Flutter
   - LookinServer (1.0.0)
-  - lottie-ios (3.1.9)
 
 DEPENDENCIES:
   - Flutter (from `../jp_flutter_module/.ios/Flutter/engine`)
@@ -16,12 +15,10 @@ DEPENDENCIES:
   - FlutterPluginRegistrant (from `../jp_flutter_module/.ios/Flutter/FlutterPluginRegistrant`)
   - jp_flutter_module (from `../jp_flutter_module/.ios/Flutter`)
   - LookinServer
-  - lottie-ios
 
 SPEC REPOS:
   trunk:
     - LookinServer
-    - lottie-ios
 
 EXTERNAL SOURCES:
   Flutter:
@@ -39,8 +36,7 @@ SPEC CHECKSUMS:
   FlutterPluginRegistrant: 03a06fa5f754c611bb6c96f42acf9432e8c4515d
   jp_flutter_module: 022be9c7f92ba6da08760278a9bc5c34692dd83e
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
-  lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
 
-PODFILE CHECKSUM: b18c0f65613d888ab12ead83c7ca5d22f24a2ccb
+PODFILE CHECKSUM: fb9cd5fe1032f18d07ff1d2809e1de3b4e19fdcc
 
 COCOAPODS: 1.9.3

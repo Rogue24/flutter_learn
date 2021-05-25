@@ -124,9 +124,22 @@ extension Flutter {
             
             let animated = (exts[Key.animated.rawValue].map { $0 } as? Bool) ?? true
             
-            // present = exts["params"]["present"]
-            if let params = exts[Key.params.rawValue] as? [AnyHashable: Any],
-               let present = params[Key.present.rawValue] as? Bool, present == true {
+//            // present = exts["params"]["present"]
+//            if let params = exts[Key.params.rawValue] as? [AnyHashable: Any],
+//               let present = params[Key.present.rawValue] as? Bool, present == true {
+//                flbVC.dismiss(animated: animated, completion: { completion(true) })
+//                return
+//            }
+            /* ↓↓↓↓↓↓↓↓↓↓↓
+             * 官方文档的 present 是放在 exts["params"]["present"] 里面
+             * 但是当调用 FlutterBoost.singleton.closeCurrent(exts: {"params": {"present": true}}) 时，
+             * 内部有这样一句代码：exts["params"] = settings.params
+             * 日尼玛这不就把 "params" 覆盖了嘛！！！难怪一直拿不到！！！
+             * 所以直接放 exts["present"] 这里好了！！！
+             */
+            
+            // present = exts["present"]
+            if let present = exts[Key.present.rawValue] as? Bool, present == true {
                 flbVC.dismiss(animated: animated, completion: { completion(true) })
                 return
             }

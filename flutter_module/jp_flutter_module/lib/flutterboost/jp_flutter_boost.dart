@@ -1,10 +1,10 @@
 import 'package:flutter_boost/flutter_boost.dart';
 import 'dart:ui';
-
 import '../pages/JP/1_bottom_sheet.dart';
 import '../pages/JP/2_center_aleat.dart';
 import '../pages/JP/jp_demo.dart';
 import '../pages/JP/jp_main.dart';
+import '../pages/JP/jp_test.dart';
 import '../shared/JPLog.dart';
 import 'JPBoostNavigatorObserver.dart';
 
@@ -21,6 +21,7 @@ class JPFlutterBoost {
       JPDemo.routeName: (pageName, params, _) => JPDemo(),
       JPBottomSheetExample.routeName: (pageName, params, _) => JPBottomSheetExample(),
       JPCenterAleatExample.routeName: (pageName, params, _) => JPCenterAleatExample(),
+      JPTest.routeName: (pageName, params, _) => JPTest(),
     });
     
     // 监听导航状态
@@ -37,11 +38,14 @@ class JPFlutterBoost {
     fbs.channel.addEventListener('event_sendFrom_native_test', (name, arguments) {
       JPrint("Flutter 接收到 iOS 发出的消息 --- name: $name, arguments: $arguments");
     });
-
+    
+    // _testVcb = () {
+    //   list.remove(listener);
+    // };
     // ignore: missing_return
     _testVcb = FlutterBoost.singleton.channel.addEventListener("event_sendFrom_native", (name, arguments) {
       JPrint("【测试】：重复接收到 event_sendFrom_native，然后移除该事件的接收，会导致【这一次】的事件传递中断！也就是说 JPMessageViewModel 不会接收到！要等下一次！");
-      _testVcb();
+      _testVcb(); // 调用返回的VoidCallback，移除该事件的监听
     });
   }
 

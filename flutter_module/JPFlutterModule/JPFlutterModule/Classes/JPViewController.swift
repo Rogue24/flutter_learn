@@ -31,7 +31,7 @@ import flutter_boost
         btn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         view.addSubview(btn)
         
-        let label = UILabel(frame: [0, 350, PortraitScreenWidth, 300.jp.px])
+        let label = UILabel(frame: [0, 350.px, PortraitScreenWidth, 300.px])
         label.numberOfLines = 0
         label.textColor = .randomColor
         label.backgroundColor = .randomColor
@@ -62,6 +62,10 @@ import flutter_boost
         Flutter.close(uid, [Flutter.Key.jp_param.rawValue: "从 iOS - JPViewController 回去的"], animated: true) { (finish) in
             JPrint(finish ? "完成" : "失败")
         }
+    }
+    
+    deinit {
+        JPrint("JPViewController 卒")
     }
     
 //    - (void)willMoveToParentViewController:(UIViewController *)parent {

@@ -3,13 +3,21 @@ import 'package:jp_flutter_module/flutterboost/jp_flutter_boost.dart';
 import 'package:jp_flutter_module/shared/JPLog.dart';
 import 'package:jp_flutter_module/shared/JPSizeFit.dart';
 import 'package:flutter_boost/flutter_boost.dart';
+import 'package:jp_flutter_module/view_model/ios_channel_view_model.dart';
 import 'package:jp_flutter_module/view_model/ios_message_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (ctx) => JPMessageViewModel(),
+    // ChangeNotifierProvider(
+    //   create: (ctx) => JPMessageViewModel(),
+    //   child: MyApp(),
+    // )
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (ctx) => JPMessageViewModel()),
+        ChangeNotifierProvider(create: (ctx) => JPChannelViewModel()),
+      ],
       child: MyApp(),
     )
   );

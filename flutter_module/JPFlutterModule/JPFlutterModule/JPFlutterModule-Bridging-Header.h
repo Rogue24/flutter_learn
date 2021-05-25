@@ -5,7 +5,7 @@
 #import <UIKit/UIKit.h>
 
 // Swift
-#import <lottie/lottie-Swift.h>
+//#import <lottie/lottie-Swift.h>
 
 // OC
 #import "JPSolveTool.h"

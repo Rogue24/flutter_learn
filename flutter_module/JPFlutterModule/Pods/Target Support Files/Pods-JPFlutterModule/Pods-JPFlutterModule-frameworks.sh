@@ -201,13 +201,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_ROOT}/LookinServer/LookinServer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_boost/flutter_boost.framework"
   install_framework "${PODS_ROOT}/../../jp_flutter_module/.ios/Flutter/App.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_ROOT}/../../jp_flutter_module/.ios/Flutter/engine/Flutter.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/flutter_boost/flutter_boost.framework"
   install_framework "${PODS_ROOT}/../../jp_flutter_module/.ios/Flutter/App.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import 'package:jp_flutter_module/pages/JP/jp_demo.dart';
 import 'package:jp_flutter_module/shared/JPLog.dart';
+import 'package:jp_flutter_module/view_model/ios_channel_view_model.dart';
 import 'package:jp_flutter_module/view_model/ios_message_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,17 @@ class JPMainPage extends StatelessWidget {
             Consumer<JPMessageViewModel>(
               builder: (ctx, msgVM, child) {
                 return Text(
-                  msgVM.message.length > 0 ? "${msgVM.message}" : "点击纸飞机发送消息，然后接收 sendEvent",
+                  msgVM.message.length > 0 ? "${msgVM.message}" : "点击第一个纸飞机发送消息，然后接收iOS发出的消息",
+                  style: TextStyle(color: JPRandomColor(), fontSize: 20),
+                );
+              },
+            ),
+
+            SizedBox(height: 8,),
+            Consumer<JPChannelViewModel>(
+              builder: (ctx, channelVM, child) {
+                return Text(
+                  channelVM.message.length > 0 ? "${channelVM.message}" : "点击第二个纸飞机发送消息，然后接收iOS发出的消息",
                   style: TextStyle(color: JPRandomColor(), fontSize: 20),
                 );
               },
@@ -83,7 +94,7 @@ class JPMainPage extends StatelessWidget {
 
             SizedBox(height: 8,),
             RaisedButton(
-              child: Text("model 原生页面 JPViewController"),
+              child: Text("modal 原生页面 JPViewController"),
               onPressed: () {
                 FlutterBoost.singleton.open("native", urlParams: {"present": true, "nativePageName": "JPViewController", "jp_param": "从 jp_main - modal 过来的"}).then((value) {
                   JPrint("--------- 原生 返回 dismiss --------");
@@ -118,20 +129,29 @@ class JPMainPage extends StatelessWidget {
             heroTag: 3,
             child: Icon(Icons.send),
             onPressed: () {
-              FlutterBoost.singleton.channel.sendEvent("event_sendFrom_flutter", {"message": "Flutter -> iOS -> Flutter"});
+              FlutterBoost.singleton.channel.sendEvent("event_sendFrom_flutter", {"ViewModel": "JPMessageViewModel", "message": "来自 Flutter 的消息"});
             },
           ),
 
           SizedBox(height: 8,),
           FloatingActionButton(
             heroTag: 4,
+            child: Icon(Icons.send),
+            onPressed: () {
+              FlutterBoost.singleton.channel.sendEvent("event_sendFrom_flutter", {"ViewModel": "JPChannelViewModel", "message": "来自 Flutter 的消息"});
+            },
+          ),
+
+          SizedBox(height: 8,),
+          FloatingActionButton(
+            heroTag: 5,
             child: Icon(Icons.message),
             onPressed: () => _invokeTtKey.currentState.getScreenInfo(),
           ),
 
           SizedBox(height: 8,),
           FloatingActionButton(
-            heroTag: 5,
+            heroTag: 6,
             child: Icon(Icons.close),
             onPressed: () {
               // FlutterBoost.singleton.close(settings.uniqueId);

@@ -37,16 +37,28 @@ struct Flutter {
         // 监听消息
         initializeEventListener()
     }
+    
+    // Flutter官方提供的Channel：可以 接收消息（setMethodCallHandler）和 发送消息（invokeMethod）
+    static var iOSFlutterChannel: FlutterMethodChannel? = nil
 }
 
 private extension Flutter {
     //【初始化 Flutter 渠道】
     static func initializeMethodCallHandler(_ engine: FlutterEngine) {
+        // Channel初始化的name要跟Flutter端保持一致
+        
+        // FlutterBoost的Channel配置
         buildChannel("app_info", appInfoHandler, engine)
         buildChannel("device_info", deviceInfoHandler, engine)
         buildChannel("screen_info", screenInfoHandler, engine)
         buildChannel("image_picker", imagePickerHandler, engine)
         buildChannel("test", testHandler, engine)
+        
+        // Flutter官方提供的Channel
+        iOSFlutterChannel = FlutterMethodChannel(name: Key.channelPrefix + "iOSFlutter",
+                                                 binaryMessenger: engine.binaryMessenger)
+        // 接收消息（消息名要跟Flutter端保持一致）
+        iOSFlutterChannel?.setMethodCallHandler(testHandler)
     }
     
     //【监听 Flutter 发出的消息】
@@ -56,7 +68,22 @@ private extension Flutter {
             guard let obName = name, let obArguments = arguments else { return }
             
             JPrint("接收到 Flutter 消息：\(obName) --- \(obArguments)")
-            Event.sendFrom_native(obArguments).send()
+            
+            guard let viewModel = obArguments["ViewModel"] as? String else { return }
+            
+            if viewModel == "JPMessageViewModel" {
+                Event.sendFrom_native(["message": "来自iOS的消息：通过FlutterBoost发出"]).send()
+            }
+            
+            if viewModel == "JPChannelViewModel" {
+                // 发送消息（消息名要跟Flutter端保持一致）
+                iOSFlutterChannel?.invokeMethod("event_iOSFlutter",
+                                                arguments: ["message": "来自iOS的消息：通过FlutterMethodChannel发出"])
+                { result in
+                    guard let r = result else { return }
+                    JPrint("确定Flutter收到消息了，这是Flutter返回的回调信息 --- \(r)")
+                }
+            }
         }
     }
 }
