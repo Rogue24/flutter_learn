@@ -54,7 +54,7 @@ extension ViewController: UITableViewDataSource {
         
         switch indexPath.section {
         case 1:
-            cell.textLabel?.text = "看看在navCtr中的一个flutter页面里面dismiss后的状况"
+            cell.textLabel?.text = "看看navCtr中包含flutter页面然后dismiss后的状况（是不是都死掉）"
             
         default:
             let route = routes[indexPath.row]

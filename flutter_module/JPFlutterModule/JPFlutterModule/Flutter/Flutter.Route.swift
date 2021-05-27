@@ -104,9 +104,10 @@ extension Flutter {
     
     static func close(_ uid: String,
                       _ result: [String: Any] = [:],
+                      dismiss: Bool = false,
                       animated: Bool = true,
                       completion: @escaping FlutterRoute.Completion = { _ in }) {
-        FBP.close(uid, result: result, exts: [Key.animated.rawValue: animated], completion: completion)
+        FBP.close(uid, result: result, exts: [Key.present.rawValue: dismiss, Key.animated.rawValue: animated], completion: completion)
     }
     
     /// 显示一个底部弹出来的半透明flutter page

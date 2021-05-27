@@ -376,6 +376,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputPaths = (
+				"${SRCROOT}/../jp_flutter_module/.metadata",
+				"${SRCROOT}/../jp_flutter_module/.ios/Flutter/App.framework/App",
+				"${SRCROOT}/../jp_flutter_module/.ios/Flutter/engine/Flutter.framework/Flutter",
+				"${SRCROOT}/../jp_flutter_module/.ios/Flutter/flutter_export_environment.sh",
+			);
 			name = "[CP-User] Run Flutter Build jp_flutter_module Script";
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

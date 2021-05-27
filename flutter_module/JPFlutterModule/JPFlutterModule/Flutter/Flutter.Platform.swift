@@ -32,7 +32,7 @@ extension Flutter {
             let animated = (exts[Key.animated.rawValue].map { $0 } as? Bool) ?? true
             
             if url == Key.native.rawValue {
-                jumpNative(with: topVC, isModel: false, urlParams, animated, completion)
+                jumpNative(with: topVC, isModal: false, urlParams, animated, completion)
                 return
             }
             
@@ -68,7 +68,7 @@ extension Flutter {
             let animated = (exts[Key.animated.rawValue].map { $0 } as? Bool) ?? true
             
             if url == Key.native.rawValue {
-                jumpNative(with: topVC, isModel: true, urlParams, animated, completion)
+                jumpNative(with: topVC, isModal: true, urlParams, animated, completion)
                 return
             }
             
@@ -76,7 +76,7 @@ extension Flutter {
             flbVC.setName(url, params: urlParams)
             
             /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-             * FLBFlutterViewContainer 是在 willMoveToParentViewController 把回调闭包放到一个静态字典里面缓存（key为vcID），然后 close 时从静态字典里面拿到回调闭包进行回传：
+             * FLBFlutterViewContainer 是在 willMoveToParentViewController 把close的回调闭包放到一个静态字典里面缓存（key为vcID），然后 close 时从静态字典里面拿到回调闭包进行回传：
              
                  - (void)willMoveToParentViewController:(UIViewController *)parent {
                      if (parent && _name) {
@@ -140,11 +140,28 @@ extension Flutter {
             
             // present = exts["present"]
             if let present = exts[Key.present.rawValue] as? Bool, present == true {
-                flbVC.dismiss(animated: animated, completion: { completion(true) })
+                flbVC.dismiss(animated: animated, completion: {
+                    defer { completion(true) }
+                    /*
+                     * 【dismiss方法会内存泄漏！！！！！！】
+                     * Flutter页面控制器 是FLBFlutterViewContainer
+                     * FLBFlutterViewContainer 内部要调用 notifyWillDealloc 才能真正的死去
+                     * 而 notifyWillDealloc 是内部方法，只在 dismiss 和 didMove(toParent: nil) 方法里面调用
+                     * 所以这里只有这个 close方法的调用者 才会调用 dismiss，如果是 Flutter页面控制器 才会从而触发 notifyWillDealloc 去销毁！
+                     * 其他里面的 Flutter页面控制器 并不会自动执行 didMove(toParent: nil)，因此其他的根本没死去！
+                     * 解决方法：dismiss后手动调用其他的 Flutter页面控制器 的 didMove(toParent: nil) 或 perform(Selector(("notifyWillDealloc"))) 方法！
+                     * 注意：notifyWillDealloc 不能重复调用！否则不能死干净！也就是说 dismiss 的这个不能再 didMove(toParent: nil) 了，FLBFlutterViewContainer 内部并没有做防重处理（垃圾）
+                     */
+                    guard let navCtr = flbVC.navigationController else { return }
+                    for vc in navCtr.viewControllers where vc != flbVC && vc is FLBFlutterViewContainer {
+                        // vc.perform(Selector(("notifyWillDealloc"))) 不太安全
+                        vc.didMove(toParent: nil)
+                    }
+                })
                 return
             }
             
-            if let navCtr = topVC.navigationController, navCtr.viewControllers.count > 1 {
+            if let navCtr = flbVC.navigationController, navCtr.viewControllers.count > 1 {
                 navCtr.popViewController(animated: animated)
                 completion(true)
             } else {
@@ -157,7 +174,7 @@ extension Flutter {
         // iOS -> sendEvent
         // Flutter -> provider -> 创建ViewModel -> addEventListener
         private func jumpNative(with topVC: UIViewController,
-                                isModel: Bool,
+                                isModal: Bool,
                                 _ params: [AnyHashable: Any],
                                 _ animated: Bool,
                                 _ completion: @escaping (Bool) -> Void) {
@@ -165,21 +182,27 @@ extension Flutter {
                 return
             }
             
-            typealias FlbVc = UIViewController & FLBFlutterContainer
-            
             let className = Bundle.jp.executable() + "." + nativePageName
-            guard let vcType = NSClassFromString(className) as? FlbVc.Type else {
+            guard let vcType = NSClassFromString(className) as? UIViewController.Type else {
                 return
             }
             
-            let flbVC = vcType.init()
-            flbVC.setName(Key.native.rawValue, params: params)
+            let vc = vcType.init()
             
-            if !isModel, let navCtr = topVC.navigationController {
-                navCtr.pushViewController(flbVC, animated: animated)
+            typealias FlbVc = UIViewController & FLBFlutterContainer
+            if let flbVC = vc as? FlbVc {
+                flbVC.setName(Key.native.rawValue, params: params)
+                if isModal, flbVC is FLBFlutterViewContainer {
+                    // 垃圾FLBFlutterViewContainer：由于 present 方式并没有触发 willMoveToParentViewController，所以在这里自己调用一下触发吧。
+                    flbVC.willMove(toParent: flbVC)
+                }
+            }
+            
+            if !isModal, let navCtr = topVC.navigationController {
+                navCtr.pushViewController(vc, animated: animated)
                 completion(true)
             } else {
-                topVC.present(flbVC, animated: animated) { completion(true) }
+                topVC.present(vc, animated: animated) { completion(true) }
             }
         }
         

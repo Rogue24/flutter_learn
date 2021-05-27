@@ -8,6 +8,7 @@
 import UIKit
 import flutter_boost
 
+/// 要遵守 FLBFlutterContainer 协议，为了在 close 时能通过 uniqueIDString() 获取对应的控制器进行关闭
 @objc class JPViewController: UIViewController, FLBFlutterContainer, UIGestureRecognizerDelegate {
     
     init() {
@@ -47,7 +48,7 @@ import flutter_boost
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // 隐藏导航栏
+        // 恢复导航栏
         navigationController?.setNavigationBarHidden(false, animated: animated)
         // 恢复手势返回
         navigationController?.interactivePopGestureRecognizer?.delegate = self
