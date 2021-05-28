@@ -150,13 +150,42 @@ extension Flutter {
                      * 但是 notifyWillDealloc 是内部方法（只在.m文件），只在 dismiss 和 didMove(toParent: nil) 方法里面调用
                      * 可是这里只有这个【close方法的调用者】才会调用 dismiss，并且如果是【Flutter页面控制器】才会从而触发 notifyWillDealloc 去销毁！
                      * 然而导航控制器里面其他的【Flutter页面控制器】并不会自动执行 didMove(toParent: nil)，因此其他的vc根本没死去！
-                     * 解决方法：dismiss后手动调用其他的 Flutter页面控制器 的 didMove(toParent: nil) 或 perform(Selector(("notifyWillDealloc"))) 方法！
-                     * 注意：notifyWillDealloc 不能重复调用！否则不能死干净！也就是说 dismiss 的这个vc不能再调用 didMove(toParent: nil) 了，FLBFlutterViewContainer 内部并没有做防重处理（垃圾）
+                     
+                     * 解决方法：dismiss后【手动】调用其他的 Flutter页面控制器 的 didMove(toParent: nil) 或 perform(Selector(("notifyWillDealloc"))) 方法！
+                     * 注意：在 notifyWillDealloc 之前要先调用 viewDidDisappear，否则【Flutter页面控制器】不会立马去死，可能会慢个几秒吧（垃圾）
+                     
+                     * viewDidDisappear的内部实现：
+                         - (void)viewDidDisappear:(BOOL)animated
+                         {
+                             [BoostMessageChannel didDisappearPageContainer:^(NSNumber *result) {}
+                                                                         pageName:_name
+                                                                           params:_params
+                                                                         uniqueId:self.uniqueIDString];
+                             [super bridge_viewDidDisappear:animated];
+                         }
+                     
+                     * notifyWillDealloc的内部实现：
+                         - (void)notifyWillDealloc
+                         {
+                             [BoostMessageChannel willDeallocPageContainer:^(NSNumber *r) {}
+                                                                        pageName:_name params:_params
+                                                                        uniqueId:[self uniqueIDString]];
+
+                             [FLUTTER_APP removeViewController:self];
+                             
+                             [self.class instanceCounterDecrease];
+                         }
                      */
                     guard let navCtr = flbVC.navigationController else { return }
-                    for vc in navCtr.viewControllers where vc != flbVC && vc is FLBFlutterViewContainer {
-                        // vc.perform(Selector(("notifyWillDealloc"))) 不太安全
+                    for vc in navCtr.viewControllers where vc is FLBFlutterViewContainer {
+                        // performSelector不太安全
+                        // vc.perform(Selector(("notifyWillDealloc")))
+                        
+                        // ↓↓↓↓↓最保险死法↓↓↓↓↓
+                        vc.viewDidDisappear(false)
+                        vc.view.removeFromSuperview()
                         vc.didMove(toParent: nil)
+                        vc.removeFromParent()
                     }
                 })
                 return
