@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844904176321839118 */
 
 class AnimationTransitionExample extends StatelessWidget {
-  static String title = "动画 Transition";
+  static String title = "15.动画 Transition";
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +23,9 @@ class AnimationTransitionExample extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            RaisedButton(
+            ElevatedButton(
               child: Text("Modal", style: TextStyle(fontSize: 20, color: JPRandomColor())),
-              color: JPRandomColor(),
+              style: ButtonStyle(foregroundColor: MaterialStateProperty.all(JPRandomColor())),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -38,9 +38,9 @@ class AnimationTransitionExample extends StatelessWidget {
             ),
 
             SizedBox(height: 8,),
-            RaisedButton(
+            ElevatedButton(
               child: Text("Fade", style: TextStyle(fontSize: 20, color: JPRandomColor())),
-              color: JPRandomColor(),
+              style: ButtonStyle(foregroundColor: MaterialStateProperty.all(JPRandomColor())),
               onPressed: () {
                 Navigator.of(context).push(
                   PageRouteBuilder(

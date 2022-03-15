@@ -5,7 +5,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 // import 'package:jp_flutter_demo/extension/double_extension.dart';
 
 class ImagePickerExample extends StatelessWidget {
-  static String title = "获取相册和相机";
+  static String title = "21.获取相册和相机";
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class _ImagePickerPage extends StatefulWidget {
 
 class __ImagePickerPageState extends State<_ImagePickerPage> {
   ImagePicker _imagePicker = ImagePicker();
-  File _imageFile;
+  File? _imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +41,12 @@ class __ImagePickerPageState extends State<_ImagePickerPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          RaisedButton(
+          ElevatedButton(
             child: Text("选择照片"),
             onPressed: _pickImage,
           ),
 
-          _imageFile == null ? Text("请选择一张照片") : Image.file(_imageFile),
+          _imageFile == null ? Text("请选择一张照片") : Image.file(_imageFile!),
         ],
       ),
     );
@@ -55,12 +55,12 @@ class __ImagePickerPageState extends State<_ImagePickerPage> {
   void _pickImage() async {
     // camera：相机
     // gallery：相册
-    PickedFile pickedFile = await _imagePicker.getImage(source: ImageSource.gallery).catchError((error) {
+    PickedFile? pickedFile = await _imagePicker.getImage(source: ImageSource.gallery).catchError((error) {
       JPrint("错了 --- $error");
     });
 
     JPrint("拿到了");
-    setState(() => _imageFile = File(pickedFile.path));
+    setState(() => _imageFile = File(pickedFile?.path ?? "啥都没"));
   }
 
   // void _pickImage() {

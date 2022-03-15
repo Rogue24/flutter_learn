@@ -62,15 +62,17 @@ class JPHomeScreen extends StatelessWidget {
   }
 
   void openDrawer() {
-    if (_scaffoldKey.currentState.isDrawerOpen) return;
+    if (_scaffoldKey.currentState?.isDrawerOpen ?? false) return;
     JPrint("打开左侧菜单");
-    _scaffoldKey.currentState.openDrawer();
+    _scaffoldKey.currentState?.openDrawer();
   }
 
   void closeDrawer() {
-    if (_scaffoldKey.currentState.isDrawerOpen) {
+    if (_scaffoldKey.currentState?.isDrawerOpen ?? false) {
       JPrint("关闭左侧菜单");
-      Navigator.of(_scaffoldKey.currentContext).pop();
+      var currentContext = _scaffoldKey.currentContext;
+      if (currentContext == null) return;
+      Navigator.of(currentContext).pop();
     }
   }
 }

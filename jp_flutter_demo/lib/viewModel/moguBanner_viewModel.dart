@@ -10,7 +10,7 @@ class JPMoguBannerViewModel with ChangeNotifier { // with：Mixin 混入
   JPMoguBannerViewModel(this._moguBanner);
   // JPMoguBannerViewModel({String title, String image, String link}) : this._moguBanner = MoguBanner(title: title, image: image, link: link);
 
-  factory JPMoguBannerViewModel.create({String title, String image, String link}) {
+  factory JPMoguBannerViewModel.create({String title = "", String image = "", String link = ""}) {
     return JPMoguBannerViewModel(MoguBanner(title: title, image: image, link: link));
   }
 

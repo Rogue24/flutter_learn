@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844904176321839118 */
 
 class AnimationBasicExample extends StatefulWidget {
-  static String title = "动画 基本使用";
+  static String title = "11.动画 基本使用";
 
   final GlobalKey<__AnimationBasicDemoState> _animKey = GlobalKey();
   final Color _bgColor = JPRandomColor();
@@ -40,6 +40,7 @@ class _AnimationBasicExampleState extends State<AnimationBasicExample> {
         onPressed: () {
           setState(() {
             var widgetState = widget._animKey.currentState;
+            if (widgetState == null) return;
 
             if (widgetState.isAnimating()) {
               widgetState.stop();
@@ -96,8 +97,8 @@ class _AnimationBasicDemo extends StatefulWidget {
  * mixin ABC<T extends StatefulWidget> on State<T> --- 泛型 T 必须要继承于 StatefulWidget，ABC 只能被这个 T 的 State 混入
  */ 
 class __AnimationBasicDemoState extends State<_AnimationBasicDemo> with SingleTickerProviderStateMixin {
-  AnimationController _animCtr;
-  Animation _anim;
+  late AnimationController _animCtr;
+  late Animation<double> _anim;
   
   void play() {
     if (_animCtr.isAnimating) return;

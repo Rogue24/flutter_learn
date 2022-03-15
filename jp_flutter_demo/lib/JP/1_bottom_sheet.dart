@@ -3,7 +3,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 import 'package:jp_flutter_demo/extension/int_extension.dart';
 
 class JPBottomSheetExample extends StatelessWidget {
-  static String title = "Bottom Sheet";
+  static String title = "1.Bottom Sheet";
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class JPBottomSheetExample extends StatelessWidget {
 
 class _JPBottomSheet extends StatelessWidget {
 
-  static show({@required BuildContext context}) {
+  static show({required BuildContext context}) {
     showModalBottomSheet(
       context: context,
       isDismissible: true, // 可否点击背景消失 

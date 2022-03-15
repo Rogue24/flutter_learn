@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /* 学自：https://juejin.cn/post/6844903956548681735#heading-0 */
 
 class ChildrenWidgetExample extends StatelessWidget {
-  static String title = "Row & Column & Stack";
+  static String title = "7.Row & Column & Stack";
 
   @override
   Widget build(BuildContext context) {

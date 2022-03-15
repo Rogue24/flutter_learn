@@ -26,20 +26,20 @@ void main() {
         // 必传参数1：Create<R> create = R Function(BuildContext context);
         // 必传参数2：ProxyProviderBuilder<T, R> update = R Function(BuildContext context, T value, R previous);
 
-        ChangeNotifierProxyProvider<JPFilterViewModel, JPMealViewModel>(
+        ChangeNotifierProxyProvider<JPFilterViewModel, JPMealViewModel?>(
           create: (ctx) => JPMealViewModel(),
           update: (ctx, filterVM, mealVM) {
             // 当 filterVM 发生变化会来到这里，对 mealVM 做相应处理
-            mealVM.filterFor(filterVM); // 在 filterFor 内部调用了 notifyListeners（以前貌似会自动刷新）
+            mealVM?.filterFor(filterVM); // 在 filterFor 内部调用了 notifyListeners（以前貌似会自动刷新）
             return mealVM;
           },
         ),
 
-        ChangeNotifierProxyProvider<JPFilterViewModel, JPFavorViewModel>(
+        ChangeNotifierProxyProvider<JPFilterViewModel, JPFavorViewModel?>(
           create: (ctx) => JPFavorViewModel(),
           update: (ctx, filterVM, favorVM) {
             // 当 filterVM 发生变化会来到这里，对 favorVM 做相应处理
-            favorVM.filterFor(filterVM); // 在 filterFor 内部调用了 notifyListeners（以前貌似会自动刷新）
+            favorVM?.filterFor(filterVM); // 在 filterFor 内部调用了 notifyListeners（以前貌似会自动刷新）
             return favorVM;
           },
         ),

@@ -1,6 +1,6 @@
 class Person {
-  String name;
-  String avatarURL;
+  String name = "";
+  String avatarURL = "";
 
   Person.fromMap(Map<String, dynamic> json) {
     this.name = json["name"];
@@ -21,15 +21,15 @@ class Director extends Person {
 int counter = 1;
 
 class MovieItem {
-  int rank;
-  String imageURL;
-  String title;
-  String playDate;
-  double rating;
-  List<String> genres;
-  List<Actor> casts;
-  Director director;
-  String originalTitle;
+  int rank = 0;
+  String imageURL = "";
+  String title = "";
+  String playDate = "";
+  double rating = 0;
+  List<String> genres = [];
+  List<Actor> casts = [];
+  Director? director;
+  String originalTitle = "";
 
   MovieItem.fromMap(Map<String, dynamic> json) {
     this.rank = counter++;

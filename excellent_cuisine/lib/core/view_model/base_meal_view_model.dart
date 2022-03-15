@@ -5,7 +5,7 @@ import 'package:excellent_cuisine/core/view_model/filter_view_model.dart';
 
 class JPBaseMealViewModel extends ChangeNotifier {
 
-  JPFilterViewModel _filterVM;
+  JPFilterViewModel? _filterVM;
   void filterFor(JPFilterViewModel filterVM) {
     _filterVM = filterVM;
     notifyListeners(); // 通知所有监听者
@@ -22,12 +22,12 @@ class JPBaseMealViewModel extends ChangeNotifier {
   // 获取过滤后的meals 
   List<JPMealModel> get meals {
     return _meals.where((meal) {
-      if (_filterVM != null) {
-        if (_filterVM.isGlutenFree && !meal.isGlutenFree) return false;
-        if (_filterVM.isLactoseFree && !meal.isLactoseFree) return false;
-        if (_filterVM.isVegetarian && !meal.isVegetarian) return false;
-        if (_filterVM.isVegan && !meal.isVegan) return false;
-      }
+      var filterVM = _filterVM;
+      if (filterVM == null) return true;
+      if (filterVM.isGlutenFree && !meal.isGlutenFree) return false;
+      if (filterVM.isLactoseFree && !meal.isLactoseFree) return false;
+      if (filterVM.isVegetarian && !meal.isVegetarian) return false;
+      if (filterVM.isVegan && !meal.isVegan) return false;
       return true;
     }).toList();
   }

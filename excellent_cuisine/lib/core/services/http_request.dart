@@ -9,8 +9,8 @@ class JPHttpRequest {
   static final Dio dio = Dio(baseOptions);
 
   static Future<T> request<T>(String url, {String method = "get",
-                                           Map<String, dynamic> params,
-                                           Interceptor inter}) async {
+                                           Map<String, dynamic>? params,
+                                           Interceptor? inter}) async {
 
     // 1.创建单独配置
     final options = Options(method: method);
@@ -18,17 +18,17 @@ class JPHttpRequest {
     // 拦截器（可以在事件发生前拦截住去做一些处理）
     // 创建默认的全局拦截器
     Interceptor interceptor = InterceptorsWrapper(
-      onRequest: (options) {
+      onRequest: (options, handler) {
         JPrint("请求拦截");
-        return options;
+        handler.next(options); // 执行下一步
       },
-      onResponse: (response) {
+      onResponse: (response, handler) {
         JPrint("响应拦截");
-        return response;
+        handler.next(response); // 执行下一步
       },
-      onError: (error) {
+      onError: (error, handler) {
         JPrint("错误拦截");
-        return error;
+        handler.next(error); // 执行下一步
       }
     );
     // 添加全局拦截器

@@ -1,48 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:jp_flutter_demo/XMG/1_widget_element_render_tree.dart';
-import 'package:jp_flutter_demo/XMG/2_widget_key.dart';
-import 'package:jp_flutter_demo/XMG/3_GlobalKey.dart';
-import 'package:jp_flutter_demo/XMG/4_InheritedWidget.dart';
-import 'package:jp_flutter_demo/XMG/5_provider.dart';
-import 'package:jp_flutter_demo/XMG/6_pointer_event.dart';
-import 'package:jp_flutter_demo/XMG/7_gesture.dart';
-import 'package:jp_flutter_demo/XMG/8_event_bus.dart';
-import 'package:jp_flutter_demo/XMG/9_MaterialPageRoute.dart';
-import 'package:jp_flutter_demo/XMG/10_named_route.dart';
-import 'package:jp_flutter_demo/XMG/11_animation_basic.dart';
-import 'package:jp_flutter_demo/XMG/12_AnimatedWidget.dart';
-import 'package:jp_flutter_demo/XMG/13_AnimatedBuilder.dart';
-import 'package:jp_flutter_demo/XMG/14_animation_interweave.dart';
-import 'package:jp_flutter_demo/XMG/15_animation_transition.dart';
-import 'package:jp_flutter_demo/XMG/16_animation_hero.dart';
-import 'package:jp_flutter_demo/XMG/17_form_provider_test.dart';
-import 'package:jp_flutter_demo/XMG/18_theme_basic.dart';
-import 'package:jp_flutter_demo/XMG/19_theme_dark_fit.dart';
-import 'package:jp_flutter_demo/XMG/20_screen_fit.dart';
-import 'package:jp_flutter_demo/XMG/21_image_picker.dart';
-import 'package:jp_flutter_demo/XMG/22_method_channel.dart';
+import 'package:jp_flutter_demo/WHY/1_widget_element_render_tree.dart';
+import 'package:jp_flutter_demo/WHY/2_widget_key.dart';
+import 'package:jp_flutter_demo/WHY/3_GlobalKey.dart';
+import 'package:jp_flutter_demo/WHY/4_InheritedWidget.dart';
+import 'package:jp_flutter_demo/WHY/5_provider.dart';
+import 'package:jp_flutter_demo/WHY/6_pointer_event.dart';
+import 'package:jp_flutter_demo/WHY/7_gesture.dart';
+import 'package:jp_flutter_demo/WHY/8_event_bus.dart';
+import 'package:jp_flutter_demo/WHY/9_MaterialPageRoute.dart';
+import 'package:jp_flutter_demo/WHY/10_named_route.dart';
+import 'package:jp_flutter_demo/WHY/11_animation_basic.dart';
+import 'package:jp_flutter_demo/WHY/12_AnimatedWidget.dart';
+import 'package:jp_flutter_demo/WHY/13_AnimatedBuilder.dart';
+import 'package:jp_flutter_demo/WHY/14_animation_interweave.dart';
+import 'package:jp_flutter_demo/WHY/15_animation_transition.dart';
+import 'package:jp_flutter_demo/WHY/16_animation_hero.dart';
+import 'package:jp_flutter_demo/WHY/17_form_provider_test.dart';
+import 'package:jp_flutter_demo/WHY/18_theme_basic.dart';
+import 'package:jp_flutter_demo/WHY/19_theme_dark_fit.dart';
+import 'package:jp_flutter_demo/WHY/20_screen_fit.dart';
+import 'package:jp_flutter_demo/WHY/21_image_picker.dart';
+import 'package:jp_flutter_demo/WHY/22_method_channel.dart';
 
-class XMGClass extends StatelessWidget {
-  static String title = "XMG Class";
+class WHYClass extends StatelessWidget {
+  static String title = "WHY Class";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(XMGClass.title),
+        title: Text(WHYClass.title),
       ),
-      body: _XMGClassList(),
+      body: _WHYClassList(),
     );
   }
 }
 
-class _XMGClassList extends StatefulWidget {
+class _WHYClassList extends StatefulWidget {
   // 貌似使用 StatelessWidget 无法路由
   @override
-  createState() => _XMGClassListState();
+  createState() => _WHYClassListState();
 }
 
-class _XMGClassListState extends State<_XMGClassList> {
+class _WHYClassListState extends State<_WHYClassList> {
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   @override

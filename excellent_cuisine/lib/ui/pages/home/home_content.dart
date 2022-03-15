@@ -29,7 +29,7 @@ class JPHomeContent extends StatelessWidget {
             // String errorStr = snapshot.error;
             // return Center(child: Text(errorStr, style: Theme.of(context).textTheme.headline2));
 
-            JPrint(snapshot.error);
+            JPrint(snapshot.error ?? "");
             return Center(child: Text("Get category data failed.", style: Theme.of(context).textTheme.headline2));
           }
           // 不是异常，那就是加载ing，返回菊花
@@ -37,7 +37,7 @@ class JPHomeContent extends StatelessWidget {
         }
 
         // 有数据了
-        List<JPCategoryModel> categories = snapshot.data;
+        List<JPCategoryModel> categories = snapshot.data ?? [];
         return GridView.builder(
           padding: EdgeInsets.all(10.px),
 

@@ -22,7 +22,7 @@ class JPFilterContent extends StatelessWidget {
       alignment: Alignment.center,
       child: Text(
         "展示您的选择",
-        style: Theme.of(ctx).textTheme.headline3.copyWith(
+        style: Theme.of(ctx).textTheme.headline3?.copyWith(
           color: Colors.black,
           fontWeight: FontWeight.bold,
         ),
@@ -58,7 +58,7 @@ class JPFilterContent extends StatelessWidget {
     );
   }
 
-  Widget buildListTile(String title, String subTitle, bool value, Function onChange) {
+  Widget buildListTile(String title, String subTitle, bool value, void Function(bool) onChange) {
     return ListTile(
       title: Text(title),
       subtitle: Text(subTitle),

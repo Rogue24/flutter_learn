@@ -13,7 +13,7 @@ class JPGetxController extends GetxController with ProviderControllerMixin {
     registerEventBus();
   }
 
-  var _subscriptionList = List<StreamSubscription>();
+  var _subscriptionList = <StreamSubscription>[];
 
   void subscriptEvent<T>(void subscription(T event)) {
     _subscriptionList.add(eventBus.on<T>().listen((event) {

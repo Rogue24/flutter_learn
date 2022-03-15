@@ -3,7 +3,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 import 'package:jp_flutter_demo/extension/int_extension.dart';
 
 class JPCenterAleatExample extends StatelessWidget {
-  static String title = "Center Aleat";
+  static String title = "2.Center Aleat";
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class JPCenterAleatExample extends StatelessWidget {
 
 class _JPCenterAleatPage extends Dialog {
 
-  static show({@required BuildContext context}) {
+  static show({required BuildContext context}) {
     showDialog(
       barrierDismissible: true, // 可否点击背景消失 
       context: context,
@@ -57,7 +57,7 @@ class _JPCenterAleatPage extends Dialog {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("你好咩？"),
-              RaisedButton(
+              ElevatedButton(
                 child: Icon(Icons.close),
                 onPressed: () {
                   Navigator.of(context).pop();

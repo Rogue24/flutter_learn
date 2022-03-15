@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844904176321839118 */
 
 class AnimatedBuilderExample extends StatefulWidget {
-  static String title = "动画 AnimatedBuilder";
+  static String title = "13.动画 AnimatedBuilder";
   final Color _bgColor = JPRandomColor();
   final Color _iconColor = JPRandomColor();
   @override
@@ -12,8 +12,8 @@ class AnimatedBuilderExample extends StatefulWidget {
 }
 
 class _AnimatedBuilderExampleState extends State<AnimatedBuilderExample> with SingleTickerProviderStateMixin {
-  AnimationController _animCtr;
-  Animation _anim;
+  late AnimationController _animCtr;
+  late Animation<double> _anim;
   
   @override
   void initState() {

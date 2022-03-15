@@ -4,10 +4,25 @@ import 'package:jp_flutter_demo/JPLog.dart';
 // import 'package:jp_flutter_demo/extension/double_extension.dart';
 
 class MethodChannelExample extends StatelessWidget {
-  static String title = "方法通道 调用原生方法";
+  static String title = "22.方法通道 调用原生方法";
 
   @override
   Widget build(BuildContext context) {
+
+    JPrint("----- MethodChannelExample -----");
+    final mediaQueryData = MediaQuery.of(context);
+    final screenWidth = mediaQueryData.size.width;
+    final screenHeight = mediaQueryData.size.height;
+    final devicePixelRatio = mediaQueryData.devicePixelRatio;
+    final statusBarHeight = mediaQueryData.padding.top;   
+    final bottomHeight = mediaQueryData.padding.bottom;
+    JPrint("screenWidth：$screenWidth");
+    JPrint("screenHeight：$screenHeight");
+    JPrint("devicePixelRatio：$devicePixelRatio");
+    JPrint("statusBarHeight：$statusBarHeight");
+    JPrint("bottomHeight：$bottomHeight");
+    JPrint("----- MethodChannelExample -----");
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -46,7 +61,7 @@ class __MethodChannelPageState extends State<_MethodChannelPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          RaisedButton(
+          ElevatedButton(
             child: Text("获取电池信息"),
             onPressed: getBatteryInfo,
           ),

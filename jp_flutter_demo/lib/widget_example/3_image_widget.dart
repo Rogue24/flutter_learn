@@ -5,7 +5,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844903954514444302 */
 
 class ImageWidgetExample extends StatelessWidget {
-  static String title = "Image";
+  static String title = "3.Image";
 
   @override
   Widget build(BuildContext context) {

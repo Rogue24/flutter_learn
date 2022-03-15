@@ -3,7 +3,7 @@ class MoguBanner {
   String image;
   String link;
 
-  MoguBanner({this.title, this.image, this.link});
+  MoguBanner({this.title = "", this.image = "", this.link = ""});
 
   MoguBanner.fromMap(Map<String, dynamic> parsedMap): this(title: parsedMap["title"], image: parsedMap["image"], link: parsedMap["link"],);
   

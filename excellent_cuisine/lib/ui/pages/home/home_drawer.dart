@@ -37,7 +37,7 @@ class JPHomeDrawer extends StatelessWidget {
       alignment: Alignment(0, 0.75),
       child: Text(
         "开始吃", 
-        style: Theme.of(ctx).textTheme.headline3.copyWith(
+        style: Theme.of(ctx).textTheme.headline3?.copyWith(
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
@@ -45,7 +45,7 @@ class JPHomeDrawer extends StatelessWidget {
     );
   }
 
-  Widget buildListTile(Widget icon, String title, Function tapHandle) {
+  Widget buildListTile(Widget icon, String title, void Function() tapHandle) {
     return ListTile(
       leading: icon,
       title: Text(title, style: TextStyle(fontSize: 16, color: Colors.black54)),

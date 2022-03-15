@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /* 学自：https://juejin.cn/post/6844903956548681735#heading-0 */
 
 class ChildWidgetExample extends StatelessWidget {
-  static String title = "Align & Center & Padding & Container";
+  static String title = "6.Align & Center & Padding & Container";
 
   @override
   Widget build(BuildContext context) {

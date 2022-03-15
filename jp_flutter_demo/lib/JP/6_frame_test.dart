@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jp_flutter_demo/JPLog.dart';
 
 class JPFrameExample extends StatelessWidget {
-  static String title = "Frame Example";
+  static String title = "6.Frame Example";
 
   final GlobalKey<_JPFrameDemoState> gbKey = GlobalKey();
 
@@ -25,7 +25,7 @@ class JPFrameExample extends StatelessWidget {
         child: Icon(Icons.ac_unit),
         onPressed: () {
           var state = gbKey.currentState;
-          state.doSomeThing();
+          state?.doSomeThing();
         },
       ),
 
@@ -82,17 +82,21 @@ class _JPFrameDemoState extends State<JPFrameDemo> {
     // JPrint("onTapDown globalPosition: ${details.globalPosition}"); // 相对于【屏幕】
     // JPrint("onTapDown localPosition: ${details.localPosition}"); // 相对于【子Widget】
 
-    RenderBox renderBox1 = _key1.currentContext.findRenderObject();
+    var context1 = _key1.currentContext;
+    var context2 = _key2.currentContext;
+    if (context1 == null || context2 == null) return;
+
+    RenderBox? renderBox1 = context1.findRenderObject() as RenderBox?;
+    RenderBox? renderBox2 = context2.findRenderObject() as RenderBox?;
+    if (renderBox1 == null || renderBox2 == null) return;
+
     var size1 = renderBox1.size;
     var position1 = renderBox1.localToGlobal(Offset.zero);
-
     JPrint("size1: $size1");
     JPrint("position1: $position1");
     
-    RenderBox renderBox2 = _key2.currentContext.findRenderObject();
     var size2 = renderBox2.size;
     var position2 = renderBox2.localToGlobal(Offset.zero);
-
     JPrint("size2: $size2");
     JPrint("position2: $position2");
   }

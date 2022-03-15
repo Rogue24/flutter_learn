@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 // Provider 用于全局共享，在 main.dart 中将 主体Widget（MyApp）包裹住
 
 class ProviderExample extends StatelessWidget {
-  static String title = "Provider";
+  static String title = "5.Provider";
 
   @override
   Widget build(BuildContext context) {

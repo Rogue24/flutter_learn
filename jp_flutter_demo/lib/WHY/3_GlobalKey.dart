@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844904170571431944 */
 
 class GlobalKeyExample extends StatelessWidget {
-  static String title = "GlobalKey";
+  static String title = "3.GlobalKey";
 
   /*
    * GlobalKey 可以访问某个 Widget 的信息
@@ -34,15 +34,19 @@ class GlobalKeyExample extends StatelessWidget {
         child: Icon(Icons.data_usage),
         heroTag: "1", // 如果有多个 FloatingActionButton 会导致 heroTag 的冲突，要分别设置跟其他不一样的 heroTag
         onPressed: () {
-          JPrint("对应的widget（state._widget）${gbKey.currentState.widget.hashCode}");
-          JPrint("对应的state ${gbKey.currentState.hashCode}");
+          var currentState = gbKey.currentState;
+          var currentContext = gbKey.currentContext;
+          if (currentState == null || currentContext == null) return;
+
+          JPrint("对应的widget（state._widget）${currentState.widget.hashCode}");
+          JPrint("对应的state ${currentState.hashCode}");
           
-          JPrint("${gbKey.currentState.widget.widgetValue}");
-          JPrint("${gbKey.currentState.stateValue}");
-          JPrint("${gbKey.currentContext}，也就是BuildContext");
+          JPrint("${currentState.widget.widgetValue}");
+          JPrint("${currentState.stateValue}");
+          JPrint("$currentContext，也就是BuildContext");
           // 有了state对象，就可以调用state及其widget的方法
-          gbKey.currentState.doSomeThing();
-          gbKey.currentState.widget.doSomeThing();
+          currentState.doSomeThing();
+          currentState.widget.doSomeThing();
         },
       )
 

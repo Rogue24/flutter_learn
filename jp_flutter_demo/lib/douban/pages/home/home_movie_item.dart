@@ -261,7 +261,7 @@ class JPHomeMovieItem extends StatelessWidget {
   Widget buildContentInfoDesc() {
     // 1.字符串拼接
     final genresStr = movie.genres.join(" "); // join：将字符串数组拼接成一个字符串，以传入的参数为分隔符
-    final directorStr = movie.director.name;
+    final directorStr = movie.director?.name ?? "";
     final actorStr = movie.casts.map((item) => item.name).join(" "); // map：映射，遍历每个元素，回调函数：对每个元素做什么，返回：Iterable<T>
     return Text(
       "$genresStr / $directorStr / $actorStr",

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:jp_flutter_demo/JPLog.dart';
 
 class JPFutureWaitExample extends StatelessWidget {
-  static String title = "Future.wait Example";
+  static String title = "4.Future.wait Example";
 
   @override
   Widget build(BuildContext context) {

@@ -37,18 +37,22 @@ class RandomWordsState extends State<RandomWords> {
     // 可以通过 Timer.run，把【要执行的代码块】放入到<<事件队列>>的后面
     // 此时放入的将会在 build 之后才会执行（build方法本来已经放入到事件队列的了），到那时候 context 是已经准备好了
     Timer.run(() {
-      var settings = ModalRoute.of(context).settings;
-      if (settings.name != null) JPrint("Timer.run --- settings.name --- ${settings.name}");
-      if (settings.arguments != null) JPrint("Timer.run --- settings.arguments --- ${settings.arguments}");
+      var settings = ModalRoute.of(context)?.settings;
+      var name = settings?.name;
+      var arguments = settings?.arguments;
+      if (name != null) JPrint("settings.name --- $name");
+      if (arguments != null) JPrint("settings.arguments --- $arguments");
     });
   }
 
   @override
   Widget build(BuildContext context) {
     // 获取路由参数
-    var settings = ModalRoute.of(context).settings;
-    if (settings.name != null) JPrint("settings.name --- ${settings.name}");
-    if (settings.arguments != null) JPrint("settings.arguments --- ${settings.arguments}");
+    var settings = ModalRoute.of(context)?.settings;
+    var name = settings?.name;
+    var arguments = settings?.arguments;
+    if (name != null) JPrint("settings.name --- $name");
+    if (arguments != null) JPrint("settings.arguments --- $arguments");
 
     // final wordPair = WordPair.random();
     // return Text(wordPair.asPascalCase);

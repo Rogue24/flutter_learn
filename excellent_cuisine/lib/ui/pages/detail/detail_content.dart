@@ -8,7 +8,8 @@ import 'package:excellent_cuisine/ui/extension/double_extension.dart';
 class JPDetailContent extends StatelessWidget {
   // 使用传递方式获取JPMealModel，因为此文件有多处地方会用到该对象，如果都通过路由获取就比较繁琐了。
   final JPMealModel _meal;
-  JPDetailContent(this._meal);
+  final String _whereFrom;
+  JPDetailContent(this._meal, this._whereFrom);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,8 @@ extension BuildSubWidgets on JPDetailContent {
   // 1.横幅图片
   Widget buildBannerImage() {
     return Hero(
-      tag: _meal.imageUrl,
+      // 要保证只有【来去】的页面的tag一样，不会跟其他页面的tag一样，否则会突然跟另一个地方的页面有过渡动画
+      tag: "${_whereFrom}_${_meal.imageUrl}",
       
       child: Container(
         color: Colors.black12,
@@ -115,14 +117,14 @@ extension BuildSubWidgets on JPDetailContent {
       padding: EdgeInsets.symmetric(vertical: 12.px), // 上下的间距
       child: Text(
         title, 
-        style: Theme.of(ctx).textTheme.headline3.copyWith(
+        style: Theme.of(ctx).textTheme.headline3?.copyWith(
           fontWeight: FontWeight.bold
         ),
       ),
     );
   }
 
-  Widget buildBorderContainer({Widget child, Color bgColor = Colors.white54, Color borderColor = Colors.grey}) {
+  Widget buildBorderContainer({required Widget child, Color bgColor = Colors.white54, Color borderColor = Colors.grey}) {
     return Container(
       width: JPSizeFit.screenWidth - 20.px,
       padding: EdgeInsets.all(8.px),

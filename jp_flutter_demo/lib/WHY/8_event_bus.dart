@@ -8,7 +8,7 @@ import 'package:jp_flutter_demo/model/moguBanner_model.dart';
 // EventBus 用于跨组件事件传递，定义在 main.dart，全局用一个即可。
 
 class EventBusExample extends StatelessWidget {
-  static String title = "跨组件事件传递 EventBus";
+  static String title = "8.跨组件事件传递 EventBus";
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _EventBusDemo extends StatelessWidget {
 class _JPButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
       child: Text("发射"),
       onPressed: () {
         
@@ -78,6 +78,11 @@ class __JPTextState1 extends State<_JPText1> {
 
     // 3.监听事件 --- 使用泛型来指定监听哪种类型的事件
     eventBus.on<MoguBanner>().listen((event) {
+      // 因为eventBus是全局的，不能销毁，所以有可能在该组件dispose之后还会接收到事件，导致错误
+      // 要在使用setState()方法前判断”mounted“属性，检测该组件是否还在组件树中（是否已经被销毁）
+      // 参考：https://blog.csdn.net/fwq_17802927858/article/details/101060802
+      if (!mounted) return;
+
       setState(() {
         
         JPrint("1 --- ${event.title}");
@@ -91,7 +96,7 @@ class __JPTextState1 extends State<_JPText1> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(_banner.title ?? "空的 亲", style: TextStyle(fontSize: 20),);
+    return Text(_banner.title, style: TextStyle(fontSize: 20),);
   }
 }
 
@@ -107,6 +112,11 @@ class __JPTextState2 extends State<_JPText2> {
     super.initState();
 
     eventBus.on<MoguBanner>().listen((event) {
+      // 因为eventBus是全局的，不能销毁，所以有可能在该组件dispose之后还会接收到事件，导致错误
+      // 要在使用setState()方法前判断”mounted“属性，检测该组件是否还在组件树中（是否已经被销毁）
+      // 参考：https://blog.csdn.net/fwq_17802927858/article/details/101060802
+      if (!mounted) return;
+
       setState(() {
         JPrint("2 --- ${event.title}");
         _banner = event;
@@ -118,7 +128,7 @@ class __JPTextState2 extends State<_JPText2> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(_banner.title ?? "空的 亲", style: TextStyle(fontSize: 20),);
+    return Text(_banner.title, style: TextStyle(fontSize: 20),);
   }
 }
 
@@ -134,6 +144,11 @@ class __JPTextState3 extends State<_JPText3> {
     super.initState();
 
     eventBus.on<MoguBanner>().listen((event) {
+      // 因为eventBus是全局的，不能销毁，所以有可能在该组件dispose之后还会接收到事件，导致错误
+      // 要在使用setState()方法前判断”mounted“属性，检测该组件是否还在组件树中（是否已经被销毁）
+      // 参考：https://blog.csdn.net/fwq_17802927858/article/details/101060802
+      if (!mounted) return;
+      
       setState(() {
         JPrint("3 --- ${event.title}");
         _banner = event;
@@ -145,7 +160,7 @@ class __JPTextState3 extends State<_JPText3> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(_banner.title ?? "空的 亲", style: TextStyle(fontSize: 20),);
+    return Text(_banner.title, style: TextStyle(fontSize: 20),);
   }
 }
 

@@ -11,7 +11,8 @@ final double _cardRadius = 12.px;
 
 class JPMealItem extends StatelessWidget {
   final JPMealModel _meal;
-  JPMealItem(this._meal);
+  final String _whereFrom;
+  JPMealItem(this._meal, this._whereFrom);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class JPMealItem extends StatelessWidget {
             // 参数
             settings: RouteSettings(
               name: JPDetailScreen.routeName, 
-              arguments: _meal
+              arguments: [_meal, _whereFrom] // 使用数组形式传递多参数
             ),
             // 转场时长
             transitionDuration: Duration(milliseconds: 350), 
@@ -63,7 +64,8 @@ class JPMealItem extends StatelessWidget {
     return Stack(
       children: [
         Hero(
-          tag: _meal.imageUrl,
+          // 要保证只有【来去】的页面的tag一样，不会跟其他页面的tag一样，否则会突然跟另一个地方的页面有过渡动画
+          tag: "${_whereFrom}_${_meal.imageUrl}",
 
           // ClipRRect：专门对 子Widget（child）进行裁剪
           child: ClipRRect( 
@@ -101,7 +103,7 @@ class JPMealItem extends StatelessWidget {
             // child：内容
             child: Text(
               _meal.title, 
-              style: Theme.of(ctx).textTheme.headline3.copyWith(
+              style: Theme.of(ctx).textTheme.headline3?.copyWith(
                 color: Colors.white,
               ),
             ),

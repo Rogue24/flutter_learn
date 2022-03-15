@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844903957739864078 */
 
 class SliversWidgetExample extends StatelessWidget {
-  static String title = "Slivers";
+  static String title = "10.Slivers";
 
   @override
   Widget build(BuildContext context) {

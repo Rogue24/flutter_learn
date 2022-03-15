@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844903527970504712 */
 
 class MaterialPageRouteExample extends StatefulWidget {
-  static String title = "路由导航 基本跳转";
+  static String title = "9.路由导航 基本跳转";
 
   @override
   _MaterialPageRouteExampleState createState() => _MaterialPageRouteExampleState();
@@ -31,7 +31,7 @@ class _MaterialPageRouteExampleState extends State<MaterialPageRouteExample> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(_message, style: TextStyle(fontSize: 20, color: JPRandomColor()), textAlign: TextAlign.center),
-            RaisedButton(
+            ElevatedButton(
               child: Text("push"),
               onPressed: () => pushToDemo(context),
             ),
@@ -49,7 +49,12 @@ class _MaterialPageRouteExampleState extends State<MaterialPageRouteExample> {
     // 使用 MaterialPageRoute 将页面Widget包裹住进行跳转
     var route = MaterialPageRoute(
       builder: (context) {
-        return TestPageDemo("come from MaterialPageRouteExample");
+        TestPageDemo demo = TestPageDemo("come from MaterialPageRouteExample");
+        demo.updateCount = (num, update) {
+          JPrint("TestPageDemo num: $num");
+          update();
+        };
+        return demo;
       },
     );
 
@@ -75,14 +80,22 @@ class _MaterialPageRouteExampleState extends State<MaterialPageRouteExample> {
 
 
 
-
-
-class TestPageDemo extends StatelessWidget {
+class TestPageDemo extends StatefulWidget {
   static const String routeName = "/test_page_demo";
 
   final String _message;
 
   TestPageDemo(this._message);
+
+  Function(int num, VoidCallback update)? updateCount;
+
+  @override
+  _TestPageDemoState createState() => _TestPageDemoState();
+}
+
+class _TestPageDemoState extends State<TestPageDemo> {
+
+  int myNum = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -123,10 +136,27 @@ class TestPageDemo extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(_message, style: TextStyle(fontSize: 20, color: JPRandomColor())),
+              // 通过Function属性（类似闭包）跟上一个页面打交道
+              Text("$myNum", style: TextStyle(fontSize: 20, color: JPRandomColor())),
+
+              ElevatedButton(
+                child: Text("updateCount"),
+                onPressed: () {
+                  myNum += 1;
+                  var updateCount = widget.updateCount;
+                  if (updateCount == null) return;
+                  updateCount(myNum, (){
+                    setState(() {});
+                  });
+                },
+              ),
+
+              SizedBox(height: 10,),
+
+              Text(widget._message, style: TextStyle(fontSize: 20, color: JPRandomColor())),
 
               // 路由返回并携带信息 方法一：自定义按钮点击
-              RaisedButton(
+              ElevatedButton(
                 child: Text("pop"),
                 onPressed: () => pop(context),
               )
@@ -138,6 +168,6 @@ class TestPageDemo extends StatelessWidget {
   }
 
   void pop(BuildContext context) {
-    Navigator.of(context).pop("I am back, from TestPageDemo_RaisedButton.");
+    Navigator.of(context).pop("I am back, from TestPageDemo_ElevatedButton.");
   }
 }

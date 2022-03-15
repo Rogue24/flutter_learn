@@ -1,18 +1,18 @@
 
 class JPMealModel {
-  String id;
-  List<String> categories;
-  String title;
-  int affordability;
-  int complexity;
-  String imageUrl;
-  int duration;
-  List<String> ingredients;
-  List<String> steps;
-  bool isGlutenFree;
-  bool isVegan;
-  bool isVegetarian;
-  bool isLactoseFree;
+  String id = "";
+  List<String> categories = [];
+  String title = "";
+  int affordability = 0;
+  int complexity = 0;
+  String imageUrl = "";
+  int duration = 0;
+  List<String> ingredients = [];
+  List<String> steps = [];
+  bool isGlutenFree = false;
+  bool isVegan = false;
+  bool isVegetarian = false;
+  bool isLactoseFree = false;
   
   // 自定义属性
   String get complexityStr {
@@ -24,20 +24,20 @@ class JPMealModel {
     }
   }
 
-  JPMealModel(
-      {this.id,
-      this.categories,
-      this.title,
-      this.affordability,
-      this.complexity,
-      this.imageUrl,
-      this.duration,
-      this.ingredients,
-      this.steps,
-      this.isGlutenFree,
-      this.isVegan,
-      this.isVegetarian,
-      this.isLactoseFree});
+  // JPMealModel(
+  //     {this.id,
+  //     this.categories,
+  //     this.title,
+  //     this.affordability,
+  //     this.complexity,
+  //     this.imageUrl,
+  //     this.duration,
+  //     this.ingredients,
+  //     this.steps,
+  //     this.isGlutenFree,
+  //     this.isVegan,
+  //     this.isVegetarian,
+  //     this.isLactoseFree});
 
   JPMealModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

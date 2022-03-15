@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0" # 2.12及其以上版本就得适配nullSafety了
 
 # 去这里找第三方库：https://pub.dev/
 # 安装指令：flutter packages get
@@ -26,18 +26,25 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.12.2 # 网络请求
-  provider: ^4.3.3 # 全局共享状态
-  image_picker: ^0.6.7+22 # 相机相册
-  get: 3.23.1 # Rx
-  cached_network_image: ^2.5.0 # 图片加载
+    
+  http: ^0.13.3 # 网络请求
+  provider: ^5.0.0 # 全局共享状态
+  image_picker: ^0.7.5+3 # 相机相册
+  get: ^4.1.4 # Rx
+  cached_network_image: ^3.0.0 # 图片加载
+
+  fijkplayer: ^0.10.1 # 播放器1
+  flutter_vlc_player: ^7.0.1 # 播放器2
+
+  # flutter_swiper: ^1.1.6 # 轮播图
+  flutter_swiper_tv: ^1.1.6-nullsafety # 轮播图（适配nullsafety）
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^1.0.3
 
-  english_words: ^3.1.5
-  dio: ^3.0.9
+  english_words: ^4.0.0
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:

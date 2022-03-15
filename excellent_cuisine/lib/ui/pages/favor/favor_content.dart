@@ -24,7 +24,7 @@ class JPFavorContent extends StatelessWidget {
         }
         return ListView.builder(
           itemCount: favorVM.meals.length,
-          itemBuilder: (ctx, i) => JPMealItem(favorVM.meals[i]),
+          itemBuilder: (ctx, i) => JPMealItem(favorVM.meals[i], "favorContent"),
         );
       },
     );

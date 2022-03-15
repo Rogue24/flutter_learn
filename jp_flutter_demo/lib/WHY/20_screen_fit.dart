@@ -5,7 +5,7 @@ import 'package:jp_flutter_demo/extension/double_extension.dart';
 /* 学自：https://juejin.cn/post/6844904176489594893 */
 
 class ScreenFitExample extends StatelessWidget {
-  static String title = "屏幕适配";
+  static String title = "20.屏幕适配";
 
   @override
   Widget build(BuildContext context) {

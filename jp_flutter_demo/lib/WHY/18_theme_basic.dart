@@ -5,7 +5,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844903973791465480 */
 
 class GlobalThemeExample extends StatelessWidget {
-  static String title = "Theme 全局&局部";
+  static String title = "18.Theme 全局&局部";
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +129,7 @@ class _GlobalThemePage extends StatelessWidget {
               activeColor: theme.colorScheme.primary,
             ),
 
-            RaisedButton(
+            ElevatedButton(
               child: Icon(Icons.face),
               onPressed: () {},
             ),

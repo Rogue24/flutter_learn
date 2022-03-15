@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844904175185166349 */
 
 class GestureExample extends StatelessWidget {
-  static String title = "手势识别 Gesture";
+  static String title = "7.手势识别 Gesture";
 
   @override
   Widget build(BuildContext context) {

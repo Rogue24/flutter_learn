@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class JPCategoryModel {
-  String id;
-  String title;
-  String color;
+  String id = "";
+  String title = "";
+  String color = "";
   
   // 自定义属性
-  Color kColor; // 颜色对象
+  late Color kColor; // 颜色对象
 
-  JPCategoryModel({this.id, this.title, this.color});
+  // JPCategoryModel({this.id, this.title, this.color});
 
   JPCategoryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

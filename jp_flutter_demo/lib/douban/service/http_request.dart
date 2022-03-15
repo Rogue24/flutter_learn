@@ -8,35 +8,47 @@ class JPHttpRequest {
   static final Dio dio = Dio(baseOptions);
 
   static Future<T> request<T>(String url, {String method = "get",
-                                           Map<String, dynamic> params,
-                                           Interceptor inter}) async {
+                                           Map<String, dynamic>? params,
+                                           Interceptor? inter}) async {
 
     // 1.创建单独配置
     final options = Options(method: method);
 
     // 拦截器（可以在事件发生前拦截住去做一些处理）
-    // 创建默认的全局拦截器
+    // 1.创建默认的全局拦截器
     Interceptor interceptor = InterceptorsWrapper(
-      onRequest: (options) {
+      // typedef InterceptorSendCallback = void Function(
+      //   RequestOptions options,
+      //   RequestInterceptorHandler handler,
+      // );
+      onRequest: (options, handler) {
         JPrint("请求拦截");
-        return options;
+        handler.next(options); // 执行下一步
       },
-      onResponse: (response) {
+      // typedef InterceptorSuccessCallback = void Function(
+      //   Response e,
+      //   ResponseInterceptorHandler handler,
+      // );
+      onResponse: (response, handler) {
         JPrint("响应拦截");
-        return response;
+        handler.next(response); // 执行下一步
       },
-      onError: (error) {
+      // typedef InterceptorErrorCallback = void Function(
+      //   DioError e,
+      //   ErrorInterceptorHandler handler,
+      // );
+      onError: (error, handler) {
         JPrint("错误拦截");
-        return error;
+        handler.next(error); // 执行下一步
       }
     );
-    // 添加全局拦截器
+    // 2.添加全局拦截器
     List<Interceptor> interceptors = [interceptor];
-    // 添加外界的拦截器
+    // 3.添加外界的拦截器
     if (inter != null) {
       interceptors.add(inter);
     }
-    // 统一添加到拦截器中
+    // 4.统一添加到拦截器中
     dio.interceptors.addAll(interceptors);
 
     // 2.发送网络请求

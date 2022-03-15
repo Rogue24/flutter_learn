@@ -17,7 +17,7 @@ Future<List<MoguBanner>> loadLocalJSON() async {
   final maps = jsonResult["data"]["banner"]["list"];
   
   // 3.遍历并转成 MoguBanner 对象放到一个 List 中返回
-  List<MoguBanner> banners = List();
+  List<MoguBanner> banners = [];
   for (var map in maps) {
     MoguBanner banner = MoguBanner.fromMap(map);
     banners.add(banner);
@@ -29,7 +29,7 @@ Future<List<MoguBanner>> loadLocalJSON() async {
 // 异步请求 网络 JSON
 Future<List<MoguBanner>> loadNetworkJSON() async {
   // 1.请求 json 数据
-  var jsonData = await http.get("http://123.207.32.32:8000/home/multidata");
+  var jsonData = await http.get(Uri.parse("http://123.207.32.32:8000/home/multidata"));
   String jsonStr = jsonData.body;
 
   // 2.解析，转成 List 或 Map 类型
@@ -37,7 +37,7 @@ Future<List<MoguBanner>> loadNetworkJSON() async {
   final maps = jsonResult["data"]["banner"]["list"];
   
   // 3.遍历并转成 MoguBanner 对象放到一个 List 中返回
-  List<MoguBanner> banners = List();
+  List<MoguBanner> banners = [];
   for (var map in maps) {
     MoguBanner banner = MoguBanner.fromMap(map);
     banners.add(banner);
@@ -93,11 +93,14 @@ class __ContentState extends State<_Content> {
     });
 
     Future.delayed(Duration(seconds: 1), () {
-      getNetworkJSON().then((value) {
+      getNetworkJSON()
+      .then((value) {
+        print("获取成功");
         setState(() {
           networkJsonStr = value;
         });
-      });
+      })
+      .catchError((error) => print("获取失败 $error"));
     });
   }
   Future<String> getLocalJSON() async {
@@ -105,7 +108,7 @@ class __ContentState extends State<_Content> {
     return jsonStr;
   }
   Future<String> getNetworkJSON() async {
-    var jsonData = await http.get("http://123.207.32.32:8000/home/multidata");
+    var jsonData = await http.get(Uri.parse("http://123.207.32.32:8000/home/multidata"));
     String jsonStr = jsonData.body;
     return jsonStr;
   }

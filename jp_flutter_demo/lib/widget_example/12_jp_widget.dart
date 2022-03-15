@@ -5,7 +5,7 @@ import 'package:jp_flutter_demo/douban/widgets/jp_dashed_line.dart';
 /* 学自：https://juejin.cn/post/6844903957744058381 */
 
 class JPWidgetExample extends StatelessWidget {
-  static String title = "星星打分+虚线的Widget";
+  static String title = "12.星星打分+虚线的Widget";
 
   @override
   Widget build(BuildContext context) {

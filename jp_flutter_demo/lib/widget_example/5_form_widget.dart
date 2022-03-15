@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 
 class FormWidgetExample extends StatelessWidget {
   static const String routeName = "/form_page_demo";
-  static String title = "Form";
+  static String title = "5.Form";
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +35,15 @@ class _MyForm extends StatefulWidget {
 
 class _MyFormState extends State<_MyForm> {
   final _loginFormKey = GlobalKey<FormState>();
-  String _phone, _password;
+  String _phone = "";
+  String _password = "";
 
   // 点击按钮，调用 Form 的 State 对象的 save 方法，就会调用 Form 中放入的全部 TextFormField 的 onSave 回调
   // 问题是，怎么拿到 Form 的 State 对象 ？
   // ==> 绑定 GlobalKey，用一个属性保存这个 GlobalKey 可获取 Form 的 State
   void _goLogin() {
-    _loginFormKey.currentState.save(); // 回调 ==> TextFormField 的 onSave 方法
-    _loginFormKey.currentState.validate(); // 回调 ==> TextFormField 的 validator 方法
+    _loginFormKey.currentState?.save(); // 回调 ==> TextFormField 的 onSave 方法
+    _loginFormKey.currentState?.validate(); // 回调 ==> TextFormField 的 validator 方法
 
     JPrint("手机号：$_phone，密码：$_password");
   }
@@ -68,8 +69,8 @@ class _MyFormState extends State<_MyForm> {
                     initialValue: formVM.phone,
                     decoration:
                         InputDecoration(icon: Icon(Icons.people), labelText: "手机号"),
-                    onSaved: (value) => _phone = value, // 当 Form 的 State 对象调用了 save 方法就会回调这里的代码
-                    validator: (value) => value.isEmpty ? "手机号不能为空" : null,
+                    onSaved: (value) => _phone = value ?? "", // 当 Form 的 State 对象调用了 save 方法就会回调这里的代码
+                    validator: (value) => (value?.isEmpty ?? true) ? "手机号不能为空" : null,
                     // autovalidate: true, // 开启自动验证（该属性已过期）
                 ),
 
@@ -78,10 +79,10 @@ class _MyFormState extends State<_MyForm> {
                   obscureText: true, // 密码
                   decoration:
                       InputDecoration(icon: Icon(Icons.lock), labelText: "密码"),
-                  onSaved: (value) => _password = value, // 当 Form 的 State 对象调用了 save 方法就会回调这里的代码
+                  onSaved: (value) => _password = value ?? "", // 当 Form 的 State 对象调用了 save 方法就会回调这里的代码
                   validator: (value) {
                     // 这里回调的是下方的警告文案
-                    if (value.isEmpty) return "密码不能为空";
+                    if (value?.isEmpty ?? true) return "密码不能为空";
                     return null;
                   },
                 ),
@@ -91,8 +92,8 @@ class _MyFormState extends State<_MyForm> {
                 Container(
                   width: double.infinity, // 无限大至父容器的宽度
                   height: 44,
-                  child: RaisedButton(
-                    color: Colors.lightGreen,
+                  child: ElevatedButton(
+                    style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Colors.lightGreen)),
                     child: Text("登录", style: TextStyle(fontSize: 20, color: Colors.white)),
                     onPressed: () {
                       // 保存文本框的值到属性上
@@ -147,8 +148,8 @@ class _MyFormState extends State<_MyForm> {
     //         Container(
     //           width: double.infinity, // 无限大至父容器的宽度
     //           height: 44,
-    //           child: RaisedButton(
-    //             color: Colors.lightGreen,
+    //           child: ElevatedButton(
+    //             style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Colors.lightGreen)),
     //             child: Text(
     //               "登录",
     //               style: TextStyle(fontSize: 20, color: Colors.white),

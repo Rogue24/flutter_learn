@@ -11,14 +11,14 @@ class JPStarRating extends StatefulWidget {
   final Widget selectedImage;
 
   JPStarRating({
-    @required double rating,
+    required double rating,
     this.maxRating = 10,
     this.count = 5,
     this.size = 30,
     this.unselectedColor = Colors.grey,
     this.selectedColor = Colors.yellow,
-    Widget unselectedImage,
-    Widget selectedImage
+    Widget? unselectedImage,
+    Widget? selectedImage
   }) : rating = rating > maxRating ? maxRating : rating,
        unselectedImage = unselectedImage ?? Icon(Icons.star_border, color: unselectedColor, size: size),
        selectedImage = selectedImage ?? Icon(Icons.star, color: selectedColor, size: size);

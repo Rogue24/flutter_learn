@@ -1,4 +1,4 @@
-// 来自：https://github.com/marcojakob/dart-event-bus
+// 来自：https://github.com/marcojakob/dart-event-bus/blob/master/lib/event_bus.dart
 import 'dart:async';
 
 /// Dispatches events to listeners using the Dart [Stream] API. The [EventBus]
@@ -50,7 +50,7 @@ class EventBus {
   ///
   Stream<T> on<T>() {
     if (T == dynamic) {
-      return streamController.stream;
+      return streamController.stream as Stream<T>;
     } else {
       return streamController.stream.where((event) => event is T).cast<T>();
     }

@@ -23,7 +23,7 @@ class JPJsonParse {
     final jsonMaps = jsonResult["category"];
     
     // 3.遍历并转成 MoguBanner 对象放到一个 List 中返回
-    List<JPCategoryModel> categories = List();
+    List<JPCategoryModel> categories = [];
     for (var json in jsonMaps) {
       JPCategoryModel category = JPCategoryModel.fromJson(json);
       categories.add(category);

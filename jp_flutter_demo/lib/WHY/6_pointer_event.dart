@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844904175185166349 */
 
 class PointerEventExample extends StatelessWidget {
-  static String title = "Pointer Event";
+  static String title = "6.Pointer Event";
 
   @override
   Widget build(BuildContext context) {

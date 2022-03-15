@@ -30,7 +30,7 @@ class JPSizeFit {
   static bool _isInited = false;
   bool get isInited => _isInited;
 
-  static void initialize() async {
+  static void initialize(VoidCallback complete) async {
     if (_isInited) return;
     _isInited = true;
 
@@ -63,6 +63,8 @@ class JPSizeFit {
       JPrint("逻辑分辨率：$screenWidth - $screenHeight");
       JPrint("安全区域 - 顶部边距：$safeTopMargin，底部边距：$safeBottomMargin");
       JPrint("缩放比例 - 基于物理分辨率：$rpx，基于逻辑分辨率：$px");
+
+      complete();
     });
   }
 

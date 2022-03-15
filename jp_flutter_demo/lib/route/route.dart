@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/main.dart';
 import 'package:jp_flutter_demo/douban/main/douban.dart';
 import 'package:jp_flutter_demo/demo/product_list.dart';
 import 'package:jp_flutter_demo/demo/random_words.dart';
-import 'package:jp_flutter_demo/XMG/9_MaterialPageRoute.dart';
+import 'package:jp_flutter_demo/WHY/9_MaterialPageRoute.dart';
 import 'package:jp_flutter_demo/route/unknown.dart';
 import 'package:jp_flutter_demo/widget_example/5_form_widget.dart';
 
@@ -38,7 +38,8 @@ class JPRoute {
     if (settings.name == TestPageDemo.routeName) {
       return MaterialPageRoute(
         builder: (context) {
-          return TestPageDemo(settings.arguments);
+          String arguments = settings.arguments as String;
+          return TestPageDemo(arguments);
         },
       );
     }

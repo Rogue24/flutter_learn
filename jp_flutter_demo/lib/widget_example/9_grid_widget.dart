@@ -5,7 +5,7 @@ import 'package:jp_flutter_demo/demo/json_decode.dart';
 /* 学自：https://juejin.cn/post/6844903957739864078 */
 
 class GirdWidgetExample extends StatelessWidget {
-  static String title = "Gird";
+  static String title = "9.Gird";
 
   @override
   Widget build(BuildContext context) {

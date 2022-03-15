@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844904176321839118 */
 
 class AnimatedWidgetExample extends StatefulWidget {
-  static String title = "动画 AnimatedWidget";
+  static String title = "12.动画 AnimatedWidget";
   final Color _bgColor = JPRandomColor();
   final Color _iconColor = JPRandomColor();
   @override
@@ -12,8 +12,8 @@ class AnimatedWidgetExample extends StatefulWidget {
 }
 
 class _AnimatedWidgetExampleState extends State<AnimatedWidgetExample> with SingleTickerProviderStateMixin {
-  AnimationController _animCtr;
-  Animation _anim;
+  late AnimationController _animCtr;
+  late Animation<double> _anim;
 
   @override
   void initState() {
@@ -113,13 +113,13 @@ class _AnimatedWidgetExampleState extends State<AnimatedWidgetExample> with Sing
 
 class _AnimatedWidgetDemo extends AnimatedWidget {
   final Color _iconColor;
-  _AnimatedWidgetDemo(Animation anim, {Color iconColor}) : this._iconColor = iconColor, super(listenable: anim); // 要先初始化完自己其他属性才能去调用父类的构造函数
+  _AnimatedWidgetDemo(Animation anim, {required Color iconColor}) : this._iconColor = iconColor, super(listenable: anim); // 要先初始化完自己其他属性才能去调用父类的构造函数
 
   @override
   Widget build(BuildContext context) {
     // AnimatedWidget listenable 内部会自动监听 Animation 的动画值的改变，并且会自动重新执行 build 方法进行刷新
     // 对比之前的方案，唯一的好处就是 父Widget 不会不断地重新 build，只有自身会（消耗小一点点）
-    Animation anim = listenable;
+    Animation<double> anim = listenable as Animation<double>;
     return Icon(Icons.favorite, color: _iconColor, size: anim.value,);
   }
 }

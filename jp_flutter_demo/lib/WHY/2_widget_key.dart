@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844904170571431944 */
 
 class WidgetKeyExample extends StatelessWidget {
-  static String title = "Widget-key";
+  static String title = "2.Widget-key";
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +107,7 @@ class _LisetItemFul extends StatefulWidget {
   final String name;
 
   // key 是父类 StatefulWidget 的可选参数，本身没有就得自定义构造方法
-  _LisetItemFul(this.name, {Key key}) : super(key: key);
+  _LisetItemFul(this.name, {Key? key}) : super(key: key);
 
   @override
   _LisetItemFulState createState() => _LisetItemFulState();

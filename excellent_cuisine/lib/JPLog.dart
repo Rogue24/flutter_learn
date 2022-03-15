@@ -20,9 +20,9 @@ void JPrint(Object message) {
 class _CustomTrace {
   final StackTrace _trace;
 
-  String fileName;
-  int lineNumber;
-  int columnNumber;
+  String fileName = "";
+  int lineNumber = 0;
+  int columnNumber = 0;
 
   _CustomTrace(this._trace) {
     _parseTrace();

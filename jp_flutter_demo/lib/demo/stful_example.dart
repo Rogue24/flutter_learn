@@ -65,8 +65,8 @@ class _MyCounterWidgetState extends State<MyCounterWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RaisedButton(
-                color: Colors.redAccent,
+              ElevatedButton(
+                style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Colors.redAccent)),
                 child: Text(
                   "+1",
                   style: TextStyle(fontSize: 18, color: Colors.white),
@@ -79,8 +79,8 @@ class _MyCounterWidgetState extends State<MyCounterWidget> {
                   });
                 },
               ),
-              RaisedButton(
-                color: Colors.orangeAccent,
+              ElevatedButton(
+                style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Colors.orangeAccent)),
                 child: Text(
                   "-1",
                   style: TextStyle(fontSize: 18, color: Colors.white),
@@ -99,7 +99,7 @@ class _MyCounterWidgetState extends State<MyCounterWidget> {
             "当前计数：$counter",
             style: TextStyle(fontSize: 30),
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Icon(Icons.forward),
             onPressed: () => Navigator.of(context).pushNamed(ProductList.routeName),
           ),

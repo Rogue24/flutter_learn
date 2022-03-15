@@ -7,7 +7,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 // JPDataWidget 用于全局共享，定义在 main.dart，继承于 InheritedWidget
 
 class InheritedWidgetExample extends StatelessWidget {
-  static String title = "InheritedWidget";
+  static String title = "4.InheritedWidget";
 
   final GlobalKey<__InheritedWidgetDemoState> gbKey = GlobalKey();
 
@@ -31,7 +31,7 @@ class InheritedWidgetExample extends StatelessWidget {
         onPressed: () {
           var state = gbKey.currentState;
           // ignore: invalid_use_of_protected_member
-          state.setState(() => state.counter += 1);
+          state?.setState(() => state.counter += 1);
         },
       )
     );
@@ -77,7 +77,7 @@ class _JPDemo1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: JPRandomColor(),
-      child: Text("${JPDataWidget.of(context).counter}", style: TextStyle(fontSize: 30, color: JPRandomColor())),
+      child: Text("${JPDataWidget.of(context)?.counter ?? "context为空"}", style: TextStyle(fontSize: 30, color: JPRandomColor())),
     );
   }
 }
@@ -85,7 +85,7 @@ class _JPDemo1 extends StatelessWidget {
 class _JPDemo2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    int counter = JPDataWidget.of(context).counter;
+    int counter = JPDataWidget.of(context)?.counter ?? 0;
 
     return Card(
       color: JPRandomColor(),
@@ -111,7 +111,7 @@ class __JPDemo3State extends State<_JPDemo3> {
 
   @override
   Widget build(BuildContext context) {
-    int counter = JPDataWidget.of(context).counter;
+    int counter = JPDataWidget.of(context)?.counter ?? 0;
 
     return Card(
       color: JPRandomColor(),

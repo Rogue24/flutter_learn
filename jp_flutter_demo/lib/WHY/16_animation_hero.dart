@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844904176321839118 */
 
 class AnimationHeroExample extends StatelessWidget {
-  static String title = "动画 Hero";
+  static String title = "16.动画 Hero";
 
   @override
   Widget build(BuildContext context) {

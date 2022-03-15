@@ -9,7 +9,7 @@ Color JPRandomColor({double a = 1}) {
 }
 
 // ignore: non_constant_identifier_names
-void JPPush({@required Widget widget, @required BuildContext context, bool isFullscreenDialog = false}) {
+void JPPush({required Widget widget, required BuildContext context, bool isFullscreenDialog = false}) {
   Navigator.of(context).push(
     MaterialPageRoute(
       builder: (context) => widget,
@@ -19,12 +19,12 @@ void JPPush({@required Widget widget, @required BuildContext context, bool isFul
 }
 
 // ignore: non_constant_identifier_names
-void JPPushNamed({@required String routeName, @required BuildContext context}) {
+void JPPushNamed({required String routeName, required BuildContext context}) {
   Navigator.of(context).pushNamed(routeName);
 }
 
 // ignore: non_constant_identifier_names
-void JPPop({@required BuildContext context, Object result}) {
+void JPPop({required BuildContext context, Object? result}) {
   if (result == null) {
     Navigator.of(context).pop();
     return;
@@ -51,9 +51,9 @@ void JPrintWiteDate(Object message) {
 class _CustomTrace {
   final StackTrace _trace;
 
-  String fileName;
-  int lineNumber;
-  int columnNumber;
+  String fileName = "";
+  int lineNumber = 0;
+  int columnNumber = 0;
 
   _CustomTrace(this._trace) {
     _parseTrace();

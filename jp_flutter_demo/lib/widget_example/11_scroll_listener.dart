@@ -4,7 +4,7 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844903957739864078 */
 
 class ScrollListenerExample extends StatelessWidget {
-  static String title = "Scroll Listener";
+  static String title = "11.Scroll Listener";
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class _ScrollControllerDemo extends StatefulWidget {
 }
 
 class _ScrollControllerDemoState extends State<_ScrollControllerDemo> {
-  ScrollController _controller;
+  late ScrollController _controller;
   bool _isShowTop = false;
 
   @override

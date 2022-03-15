@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /* 学自：https://juejin.cn/post/6844903954514444302 */
 
 class ButtonWidgetExample extends StatelessWidget {
-  static String title = "Button";
+  static String title = "2.Button";
 
   @override
   Widget build(BuildContext context) {
@@ -36,32 +36,34 @@ class _HomeContent extends StatelessWidget {
           ),
 
           SizedBox(height: 10,),
-          RaisedButton(
-            child: Text("RaisedButton"),
-            onPressed: () => print("RaisedButton did click"),
+          ElevatedButton(
+            child: Text("ElevatedButton"),
+            onPressed: () => print("ElevatedButton did click"),
           ),
 
           SizedBox(height: 10,),
-          FlatButton(
-            child: Text("FlatButton"),
-            onPressed: () => print("FlatButton did click"),
+          TextButton(
+            child: Text("TextButton"),
+            onPressed: () => print("TextButton did click"),
           ),
 
           SizedBox(height: 10,),
-          OutlineButton(
-            child: Text("OutlineButton"),
-            onPressed: () => print("OutlineButton did click"),
+          OutlinedButton(
+            child: Text("OutlinedButton"),
+            onPressed: () => print("OutlinedButton did click"),
           ),
 
           SizedBox(height: 10,),
-          RaisedButton(
-            child: Text("Custom - RaisedButton"), 
-            textColor: Colors.white,
-            color: Colors.green,
-            highlightColor: Colors.pink[700], // 高亮颜色
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), // 圆角的实现
-            elevation: 30, // 阴影大小
-            onPressed: () => print("Custom RaisedButton did click"),
+          ElevatedButton(
+            child: Text("Custom - ElevatedButton"), 
+            style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+                backgroundColor: MaterialStateProperty.all(Colors.green),
+                overlayColor: MaterialStateProperty.all(Colors.pink[700]), // 高亮颜色
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))), // 圆角的实现
+                elevation: MaterialStateProperty.all(10), // 阴影大小
+              ),
+            onPressed: () => print("Custom ElevatedButton did click"),
           )
         ],
       )

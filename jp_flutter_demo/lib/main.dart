@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:jp_flutter_demo/XMG/xmg_class.dart';
+import 'package:jp_flutter_demo/WHY/why_class.dart';
 import 'package:jp_flutter_demo/JP/jp_demo.dart';
 import 'package:jp_flutter_demo/demo/product_list.dart';
 import 'package:jp_flutter_demo/demo/random_words.dart';
@@ -12,6 +12,8 @@ import 'package:jp_flutter_demo/providers/initialize_providers.dart';
 import 'package:jp_flutter_demo/utils/event_bus.dart';
 import 'package:jp_flutter_demo/route/route.dart';
 import 'package:jp_flutter_demo/shared/JPSizeFit.dart';
+
+import 'JPLog.dart';
 
 /*
  * 创建全局的 EventBus 对象，用于跨组件事件传递，全局用一个即可。
@@ -50,11 +52,11 @@ class JPDataWidget extends InheritedWidget {
   final int counter;
 
   // 2.定义构造方法
-  JPDataWidget({this.counter, Key key, this.child}) : super(key: key, child: child);
+  JPDataWidget({required this.counter, Key? key, required this.child}) : super(key: key, child: child);
 
   // 3.定义一个静态方法，用来获取当前 JPDataWidget
   // 依赖了当前 JPDataWidget 的 Widget，可通过自己的 context（Element）开始去查找祖先的 JPDataWidget
-  static JPDataWidget of(BuildContext context) {
+  static JPDataWidget? of(BuildContext context) {
     // dependOnInheritedWidgetOfExactType：
     // 沿着 Element tree，去找到最近的 JPDataWidget 对应的 Element 对象，再从这个 Element 中取出这个 JPDataWidget 对象（Element.widget），返回出去。
     return context.dependOnInheritedWidgetOfExactType<JPDataWidget>();
@@ -96,7 +98,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
     // 初始化屏幕信息
-    JPSizeFit.initialize();
+    // JPSizeFit.initialize();
+    // JPrint("----- MyApp -----");
+    // final mediaQueryData = MediaQuery.of(context);
+    // final screenWidth = mediaQueryData.size.width;
+    // final screenHeight = mediaQueryData.size.height;
+    // JPrint("screenWidth：$screenWidth");
+    // JPrint("screenHeight：$screenHeight");
+    // JPrint("----- MyApp -----");
 
     return MaterialApp(
 
@@ -127,6 +136,24 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    //【在这里才拿到状态栏高度，因为这个widget是全屏的】
+    JPrint("----- Home0 -----");
+    JPrint("${DateTime.now()}, 缩放因子：${JPSizeFit.dpr}");
+    final mediaQueryData = MediaQuery.of(context);
+    final screenWidth = mediaQueryData.size.width;
+    final screenHeight = mediaQueryData.size.height;
+    final devicePixelRatio = mediaQueryData.devicePixelRatio;
+    final statusBarHeight = mediaQueryData.padding.top;   
+    final bottomHeight = mediaQueryData.padding.bottom;
+
+    JPrint("screenWidth：$screenWidth");
+    JPrint("screenHeight：$screenHeight");
+    JPrint("devicePixelRatio：$devicePixelRatio");
+    JPrint("statusBarHeight：$statusBarHeight");
+    JPrint("bottomHeight：$bottomHeight");
+    JPrint("----- Home1 -----");
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("flutter_demo"),
@@ -147,6 +174,29 @@ class _HomeContentState extends State<HomeContent> {
 
   @override
   Widget build(BuildContext context) {
+
+    // 初始化屏幕信息
+    JPSizeFit.initialize(() {
+      setState(() {});
+    });
+
+    //【在这里是拿不到状态栏高度的，因为这个widget并不是全屏，而是状态栏以下的区域】
+    JPrint("----- HomeContent0 -----");
+    JPrint("${DateTime.now()}, 缩放因子：${JPSizeFit.dpr}");
+    final mediaQueryData = MediaQuery.of(context);
+    final screenWidth = mediaQueryData.size.width;
+    final screenHeight = mediaQueryData.size.height;
+    final devicePixelRatio = mediaQueryData.devicePixelRatio;
+    final statusBarHeight = mediaQueryData.padding.top;   
+    final bottomHeight = mediaQueryData.padding.bottom;
+
+    JPrint("screenWidth：$screenWidth");
+    JPrint("screenHeight：$screenHeight");
+    JPrint("devicePixelRatio：$devicePixelRatio");
+    JPrint("statusBarHeight：$statusBarHeight");
+    JPrint("bottomHeight：$bottomHeight");
+    JPrint("----- HomeContent1 -----");
+
     return ListView(
       children: [
 
@@ -218,11 +268,11 @@ class _HomeContentState extends State<HomeContent> {
         Divider(),
         ListTile(
           title: Text(
-            XMGClass.title,
+            WHYClass.title,
             style: _biggerFont,
           ),
           onTap: () {
-            _push(XMGClass());
+            _push(WHYClass());
           },
         ),
 

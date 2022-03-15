@@ -1,3 +1,4 @@
+import 'package:excellent_cuisine/JPLog.dart';
 import 'package:excellent_cuisine/core/model/category_model.dart';
 import 'package:excellent_cuisine/core/model/meal_model.dart';
 import 'package:excellent_cuisine/core/view_model/meal_view_model.dart';
@@ -11,7 +12,9 @@ class JPMealContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 1.获取【路由】参数 --- ModalRoute.of
-    var settings = ModalRoute.of(context).settings;
+    var settings = ModalRoute.of(context)?.settings;
+    if (settings == null) return Container(color: JPRandomColor(),);
+
     JPCategoryModel category = settings.arguments as JPCategoryModel;
 
     // 2.使用 Selector 进行映射并过滤：从所有菜式（JPMealViewModel.meals）中筛选出属于当前分类（category.id）的菜式
@@ -46,7 +49,7 @@ class JPMealContent extends StatelessWidget {
         }
         return ListView.builder(
           itemCount: meals.length,
-          itemBuilder: (ctx, i) => JPMealItem(meals[i]),
+          itemBuilder: (ctx, i) => JPMealItem(meals[i], "mealContent"),
         );
       },
       

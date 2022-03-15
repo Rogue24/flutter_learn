@@ -10,9 +10,11 @@ class DoubanApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 获取路由参数
-    var settings = ModalRoute.of(context).settings;
-    if (settings.name != null) JPrint("settings.name --- ${settings.name}");
-    if (settings.arguments != null) JPrint("settings.arguments --- ${settings.arguments}");
+    var settings = ModalRoute.of(context)?.settings;
+    var name = settings?.name;
+    var arguments = settings?.arguments;
+    if (name != null) JPrint("settings.name --- $name");
+    if (arguments != null) JPrint("settings.arguments --- $arguments");
 
     return MaterialApp(
       // 标题

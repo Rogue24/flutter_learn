@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /* 学自：https://juejin.cn/post/6844903954514444302 */
 
 class TextWidgetExample extends StatelessWidget {
-  static String title = "Text";
+  static String title = "1.Text";
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:jp_flutter_demo/shared/JPGetxController.dart';
 
 class JPGetxExample extends StatelessWidget {
-  static String title = "Getx Example";
+  static String title = "3.Getx Example";
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class JPGetxPage extends StatefulWidget {
 }
 class _JPGetxPageState extends State<JPGetxPage> {
 
-  JPGetxCtr _ctr;
+  late JPGetxCtr _ctr;
   
   @override
   void initState() {
@@ -131,21 +131,21 @@ class _JPGetxPageState extends State<JPGetxPage> {
           ),
           
 
-          RaisedButton(
+          ElevatedButton(
             child: Text('+a'),
             onPressed: () {
               _ctr.addA();
             },
           ),
 
-          RaisedButton(
+          ElevatedButton(
             child: Text('+b'),
             onPressed: () {
               _ctr.addB();
             },
           ),
 
-          RaisedButton(
+          ElevatedButton(
             child: Text('+ab'),
             onPressed: () {
               _ctr.addAB();

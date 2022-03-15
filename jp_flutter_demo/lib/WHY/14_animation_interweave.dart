@@ -5,15 +5,15 @@ import 'package:jp_flutter_demo/JPLog.dart';
 /* 学自：https://juejin.cn/post/6844904176321839118 */
 
 class AnimatedInterweaveExample extends StatefulWidget {
-  static String title = "动画 交织动画";
+  static String title = "14.动画 交织动画";
   final GlobalKey<__ButtonIconState> _btnIconKey = GlobalKey();
   @override
   _AnimatedInterweaveExampleState createState() => _AnimatedInterweaveExampleState();
 }
 
 class _AnimatedInterweaveExampleState extends State<AnimatedInterweaveExample> with SingleTickerProviderStateMixin {
-  AnimationController _animCtr;
-  Animation _anim;
+  late AnimationController _animCtr;
+  late Animation<double> _anim;
   
   @override
   void initState() {
@@ -72,7 +72,7 @@ class _AnimatedInterweaveExampleState extends State<AnimatedInterweaveExample> w
             play();
           }
           var iconState = widget._btnIconKey.currentState;
-          iconState.setState(() => iconState.isAnimating = _animCtr.isAnimating);
+          iconState?.setState(() => iconState.isAnimating = _animCtr.isAnimating);
         },
       ),
       
@@ -126,7 +126,7 @@ class __ButtonIconState extends State<_ButtonIcon> {
 }
 
 class _AnimationInterweaveDemo extends StatelessWidget {
-  final Animation _anim;
+  final Animation<double> _anim;
   final Animation _sizeAnim;
   final Animation _colorAnim;
   final Animation _opacityAnim;

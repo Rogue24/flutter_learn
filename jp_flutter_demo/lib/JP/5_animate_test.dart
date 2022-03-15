@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jp_flutter_demo/JPLog.dart';
 
 class JPAnimateExample extends StatelessWidget {
-  static String title = "Animate Example";
+  static String title = "5.Animate Example";
 
   final GlobalKey<_JPAnimateDemoState> gbKey = GlobalKey();
 
@@ -25,7 +25,7 @@ class JPAnimateExample extends StatelessWidget {
         child: Icon(Icons.ac_unit),
         onPressed: () {
           var state = gbKey.currentState;
-          state.doSomeThing();
+          state?.doSomeThing();
         },
       ),
 
@@ -45,9 +45,9 @@ class _JPAnimateDemoState extends State<JPAnimateDemo> with SingleTickerProvider
   double begin = 50;
   double end = 100;
 
-  AnimationController _animCtr;
-  Animation _anim;
-  Animation _sizeAnim;
+  late AnimationController _animCtr;
+  late Animation<double> _anim;
+  late Animation _sizeAnim;
   
   @override
   void initState() {
@@ -66,7 +66,7 @@ class _JPAnimateDemoState extends State<JPAnimateDemo> with SingleTickerProvider
   Widget build(BuildContext context) {
     return Center(
       child: AnimatedBuilder(
-        animation: _anim,
+        animation: _sizeAnim,
         builder: (context, child) {
           return Container(
             color: Colors.amberAccent,
@@ -81,14 +81,39 @@ class _JPAnimateDemoState extends State<JPAnimateDemo> with SingleTickerProvider
 
   void doSomeThing() {
     if (_animCtr.isAnimating) return;
-    JPrint("开始~~");
+    JPrint("开始~~ ${_sizeAnim.status}");
     
     _animCtr.forward().then((value) {
       begin = end;
       end += 50;
 
+      JPrint("reset前 ${_sizeAnim.status}");
+
       _sizeAnim = Tween<double>(begin: this.begin, end: this.end).animate(_anim);
       _animCtr.reset();
+
+      JPrint("reset后 ${_sizeAnim.status}");
+      
+      /**
+       * reset内部其实就是value直接设置了lowerBound：
+          void reset() {
+            value = lowerBound;
+          }
+
+       * 1.当 value == lowerBound --------------- status 等于 AnimationStatus.dismissed
+       * 2.当 value == upperBound --------------- status 等于 AnimationStatus.completed
+       * 3.当 lowerBound < value < lowerBound --- status 等于 AnimationStatus.forward 或 AnimationStatus.reverse
+       */
+      
+
+      // _animCtr.value = _animCtr.upperBound;
+      // JPrint("000 ${_animCtr.status}");
+
+      // _animCtr.value -= 0.1;
+      // JPrint("111 ${_animCtr.status}");
+
+      // _animCtr.value -= 0.2;
+      // JPrint("222 ${_animCtr.status}");
     });
   }
 }

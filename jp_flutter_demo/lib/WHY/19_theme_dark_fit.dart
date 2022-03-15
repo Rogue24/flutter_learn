@@ -6,7 +6,7 @@ import 'package:jp_flutter_demo/shared/JPAppTheme.dart';
 /* 学自：https://juejin.cn/post/6844903973791465480 */
 
 class DartThemeExample extends StatelessWidget {
-  static String title = "Theme 适配深色模式";
+  static String title = "19.Theme 适配深色模式";
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class _DartThemePage extends StatelessWidget {
               activeColor: theme.colorScheme.primary,
             ),
 
-            RaisedButton(
+            ElevatedButton(
               child: Icon(Icons.face),
               onPressed: () {},
             ),
