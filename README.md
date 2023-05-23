@@ -54,7 +54,3 @@ static func screenInfoHandler(_ call: FlutterMethodCall, _ result: @escaping Flu
 
 	QQ: 184669029
 	E-mail: zhoujianping24@hotmail.com
-
-## Visitors
-
-[![HitCount](http://hits.dwyl.com/Rogue24/Rogue24.svg)](http://hits.dwyl.com/Rogue24/Rogue24)
