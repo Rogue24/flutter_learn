@@ -28,7 +28,7 @@ Flutter.Event.sendFrom_native(["message": "this is message from iOS"]).send()
 
 - Flutter端调用原生方法
 
-```dart
+```swift
 // 建立渠道
 buildChannel("screen_info", screenInfoHandler, engine)
 
