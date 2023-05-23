@@ -81,6 +81,12 @@ class _JPStreamBuilderDemoState extends State<JPStreamBuilderDemo> {
     );
   }
 
+  @override
+  dispose() {
+    super.dispose();
+    _streamController.close();
+  }
+
   void doSomeThing() async {
     if (isAsking) return;
     isAsking = true;
