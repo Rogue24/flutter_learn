@@ -12,7 +12,7 @@ import 'package:jp_flutter_demo/providers/initialize_providers.dart';
 import 'package:jp_flutter_demo/utils/event_bus.dart';
 import 'package:jp_flutter_demo/route/route.dart';
 import 'package:jp_flutter_demo/shared/JPSizeFit.dart';
-
+import 'providers/navigator_provider.dart';
 import 'JPLog.dart';
 
 /*
@@ -108,6 +108,9 @@ class MyApp extends StatelessWidget {
     // JPrint("----- MyApp -----");
 
     return MaterialApp(
+      // 适用于全局的 BuildContext
+      // 在需要使用 context 的地方可直接使用全局维护的 context 进行页面跳转，showLoading，toast 等功能实现。
+      navigatorKey: NavigatorProvider.navigatorKey,
 
       // 配置路由映射表
       // routes：定义名称和路由之间的映射关系，类型为 Map<String, WidgetBuilder>? routes

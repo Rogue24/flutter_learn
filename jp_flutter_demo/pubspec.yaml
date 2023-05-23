@@ -33,8 +33,9 @@ dependencies:
   get: ^4.1.4 # Rx
   cached_network_image: ^3.0.0 # 图片加载
 
-  fijkplayer: ^0.10.1 # 播放器1
-  flutter_vlc_player: ^7.0.1 # 播放器2
+  # 这两个库只能运行在真机环境，模拟器先注释
+  # fijkplayer: ^0.10.1 # 播放器1
+  # flutter_vlc_player: ^7.1.0 # 播放器2
 
   # flutter_swiper: ^1.1.6 # 轮播图
   flutter_swiper_tv: ^1.1.6-nullsafety # 轮播图（适配nullsafety）
@@ -45,6 +46,10 @@ dependencies:
 
   english_words: ^4.0.0
   dio: ^4.0.0
+
+  # flutter toast
+  # flutter_smart_dialog: ^4.8.0 # Flutter SDK version >= 3.0.0
+  flutter_smart_dialog: ^4.2.5 # Flutter SDK version < 3.0.0
 
 dev_dependencies:
   flutter_test:

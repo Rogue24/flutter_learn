@@ -80,7 +80,7 @@ extension Flutter {
              
                  - (void)willMoveToParentViewController:(UIViewController *)parent {
                      if (parent && _name) {
-                         //当VC将要被移动到Parent中的时候，才出发flutter层面的page init
+                         //当VC将要被移动到Parent中的时候，才触发flutter层面的page init
                          [BoostMessageChannel didInitPageContainer:^(NSNumber *r) {}
                                 pageName:_name
                                   params:_params

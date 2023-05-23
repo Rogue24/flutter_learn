@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jp_flutter_demo/JP/14_AnimatedSwitcher_test.dart';
 import 'package:jp_flutter_demo/JP/4_future_wait_test.dart';
 import 'package:jp_flutter_demo/JPLog.dart';
 import '10_fijkplayer_test.dart';
 import '11_vlcplayer_test.dart';
+import '12_SmartDialog_test.dart';
+import '13_navigator_provider_test.dart';
+import '15_StreamBuilder_test.dart';
 import '1_bottom_sheet.dart';
 import '2_center_aleat.dart';
 import '3_getx_test.dart';
@@ -132,10 +136,46 @@ class _JPDemoListState extends State<_JPDemoList> {
         Divider(),
         ListTile(
           title: Text(
+            JPSmartDialogExample.title,
+            style: _biggerFont,
+          ),
+          onTap: () => JPPush(widget: JPSmartDialogExample(), context: context),
+        ),
+
+        Divider(),
+        ListTile(
+          title: Text(
             JPVlcplayerTestViewExample.title,
             style: _biggerFont,
           ),
           onTap: () => JPPush(widget: JPVlcplayerTestViewExample(), context: context),
+        ),
+        
+        Divider(),
+        ListTile(
+          title: Text(
+            JPNavigatorProviderExample.title,
+            style: _biggerFont,
+          ),
+          onTap: () => JPPush(widget: JPNavigatorProviderExample(), context: context),
+        ),
+
+        Divider(),
+        ListTile(
+          title: Text(
+            JPAnimatedSwitcherExample.title,
+            style: _biggerFont,
+          ),
+          onTap: () => JPPush(widget: JPAnimatedSwitcherExample(), context: context),
+        ),
+
+        Divider(),
+        ListTile(
+          title: Text(
+            JPStreamBuilderExample.title,
+            style: _biggerFont,
+          ),
+          onTap: () => JPPush(widget: JPStreamBuilderExample(), context: context),
         ),
       ],
     );
