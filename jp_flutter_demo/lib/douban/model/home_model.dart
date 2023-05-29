@@ -4,9 +4,14 @@ class Person {
 
   Person.fromMap(Map<String, dynamic> json) {
     this.name = json["name"];
-    // 暂时不知道为啥取不出去
-    // this.avatarURL = json["avatars"]["medium"];
-    this.avatarURL = "";
+    // 有空值的情况，需要判断
+    Map<String, dynamic>? avatars = json["avatars"];
+    if (avatars != null) {
+      String? medium = avatars["medium"];
+      if (medium != null) {
+        this.avatarURL = medium;
+      }
+    }
   }
 }
 
@@ -36,7 +41,8 @@ class MovieItem {
     this.imageURL = json["images"]["medium"];
     this.title = json["title"];
     this.playDate = json["year"];
-    this.rating = json["rating"]["average"];
+    // 有些分数被解析成int类型了，所以要转成String再转成double
+    this.rating = double.tryParse(json["rating"]["average"].toString()) ?? 0; 
     this.genres = json["genres"].cast<String>();
     this.casts = (json["casts"] as List<dynamic>).map((item) {
       return Actor.fromMap(item);

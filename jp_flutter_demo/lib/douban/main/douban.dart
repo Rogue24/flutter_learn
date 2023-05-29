@@ -69,7 +69,7 @@ class _JPMainPageState extends State<JPMainPage> {
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
-            print("点了第$index个");
+            JPrint("点了第$index个");
             _currentIndex = index;
           });
         },

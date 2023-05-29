@@ -120,11 +120,12 @@ class _LisetItemFulState extends State<_LisetItemFul> {
   @override
   void initState() {
     super.initState();
-    JPrint("build StatefulWidget --- ${widget.key}");
+    JPrint("init StatefulWidget --- ${widget.key}");
   }
 
   @override
   Widget build(BuildContext context) {
+    JPrint("build StatefulWidget --- ${widget.key}");
     return Container(
       child: Text(widget.name, style: TextStyle(fontSize: 18, color: Colors.white)),
       height: 80,
