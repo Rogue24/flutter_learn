@@ -7,6 +7,8 @@ class JPHttpRequest {
   static final BaseOptions baseOptions = BaseOptions(baseUrl: JPHttpConfig.baseURL, connectTimeout: JPHttpConfig.timeout);
   static final Dio dio = Dio(baseOptions);
 
+  static bool _isAddedMyInter = false;
+
   static Future<T> request<T>(String url, {String method = "get", 
                                            Map<String, dynamic>? headers,
                                            Map<String, dynamic>? params,
@@ -19,8 +21,30 @@ class JPHttpRequest {
       options.headers = headers;
     }
 
-    // 拦截器（可以在事件发生前拦截住去做一些处理）
-    // 2.1 创建默认的全局拦截器
+    // 2.1 添加全局拦截器
+    _addMyInterceptor();
+
+    // 2.2 添加外界的拦截器
+    if (inter != null) {
+      dio.interceptors.add(inter);
+    }
+
+    // 3.发送网络请求
+    try {
+      Response response = await dio.request(url, queryParameters: params, options: options);
+      return response.data; // 返回请求结果
+    } on DioError catch(error) {
+      return Future.error(error); // 直接抛出异常
+    }
+  }
+
+  // 添加全局拦截器
+  // 拦截器：可以在事件发生前拦截住去做一些处理
+  static void _addMyInterceptor() {
+    if (_isAddedMyInter) return;
+    _isAddedMyInter = true;
+
+    // 1.创建默认的全局拦截器
     Interceptor interceptor = InterceptorsWrapper(
       // typedef InterceptorSendCallback = void Function(
       //   RequestOptions options,
@@ -30,6 +54,7 @@ class JPHttpRequest {
         JPrint("请求拦截");
         handler.next(options); // 执行下一步
       },
+      
       // typedef InterceptorSuccessCallback = void Function(
       //   Response e,
       //   ResponseInterceptorHandler handler,
@@ -38,6 +63,7 @@ class JPHttpRequest {
         JPrint("响应拦截");
         handler.next(response); // 执行下一步
       },
+
       // typedef InterceptorErrorCallback = void Function(
       //   DioError e,
       //   ErrorInterceptorHandler handler,
@@ -47,21 +73,8 @@ class JPHttpRequest {
         handler.next(error); // 执行下一步
       }
     );
-    // 2.2 添加全局拦截器
-    List<Interceptor> interceptors = [interceptor];
-    // 2.3 添加外界的拦截器
-    if (inter != null) {
-      interceptors.add(inter);
-    }
-    // 2.4 统一添加到拦截器中
-    dio.interceptors.addAll(interceptors);
-
-    // 3.发送网络请求
-    try {
-      Response response = await dio.request(url, queryParameters: params, options: options);
-      return response.data; // 返回请求结果
-    } on DioError catch(error) {
-      return Future.error(error); // 直接抛出异常
-    }
+    
+    // 2.添加全局拦截器
+    dio.interceptors.add(interceptor);
   }
 }
